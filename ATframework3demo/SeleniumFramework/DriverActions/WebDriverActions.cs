@@ -1,6 +1,7 @@
 ﻿using atFrameWork2.BaseFramework.LogTools;
 using atFrameWork2.PageObjects;
 using atFrameWork2.TestEntities;
+using ATframework3demo.PageObjects;
 using ATframework3demo.SeleniumFramework.DriverActions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -28,7 +29,7 @@ namespace atFrameWork2.SeleniumFramework
         /// <param name="user"></param>
         /// <param name="portal"></param>
         /// <returns></returns>
-        public static PortalHomePage ReloginWithNewDefaultDriver(User user, PortalInfo portal)
+        public static MainPage ReloginWithNewDefaultDriver(User user, PortalInfo portal)
         {
             WebItem.DefaultDriver.Quit();
             WebItem.DefaultDriver = default;

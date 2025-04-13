@@ -1,10 +1,10 @@
 ﻿using OpenQA.Selenium;
 
-namespace atFrameWork2.PageObjects
+namespace ATframework3demo.PageObjects
 {
-    public class TasksListPage
+    public class ProfilePage
     {
-        public TasksListPage(IWebDriver driver = default)
+        public ProfilePage(IWebDriver driver = default)
         {
             Driver = driver;
         }

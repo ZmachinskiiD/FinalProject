@@ -45,12 +45,12 @@ namespace ATframework3demo.Pages.TestRunPage
 
             if (string.IsNullOrEmpty(PortalUri) || !Uri.TryCreate(PortalUri, UriKind.Absolute, out portalUri))
                 PortalUriBgColor = HelperMethods.GetHexColor(Color.Red);
-            else if (string.IsNullOrEmpty(PortalUser.LoginAkaEmail) || !IsEmail(PortalUser.LoginAkaEmail))
-            {
-                LoginBgColor = HelperMethods.GetHexColor(Color.Red);
-                if (!IsEmail(PortalUser.LoginAkaEmail))
-                    DisplayedError = "Логин должен быть email-ом";
-            }
+            //else if (string.IsNullOrEmpty(PortalUser.LoginAkaEmail) || !IsEmail(PortalUser.LoginAkaEmail))
+            //{
+            //    LoginBgColor = HelperMethods.GetHexColor(Color.Red);
+            //    if (!IsEmail(PortalUser.LoginAkaEmail))
+            //        DisplayedError = "Логин должен быть email-ом";
+            //}
             else if (string.IsNullOrEmpty(PortalUser.Password))
                 PwdBgColor = HelperMethods.GetHexColor(Color.Red);
             else
@@ -79,10 +79,10 @@ namespace ATframework3demo.Pages.TestRunPage
             StateHasChanged();
         }
 
-        private bool IsEmail(string email)
-        {
-            return email?.Contains("@") == true && email?.Contains(".") == true;
-        }
+        //private bool IsEmail(string email)
+        //{
+        //    return email?.Contains("@") == true && email?.Contains(".") == true;
+        //}
 
         protected override async Task OnInitializedAsync()
         {

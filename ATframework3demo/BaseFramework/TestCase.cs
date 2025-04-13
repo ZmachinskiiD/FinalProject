@@ -5,6 +5,7 @@ using atFrameWork2.SeleniumFramework;
 using atFrameWork2.TestEntities;
 using ATframework3demo.BaseFramework;
 using ATframework3demo.BaseFramework.BitrixCPinterraction;
+using ATframework3demo.PageObjects;
 using ATframework3demo.PageObjects.Mobile;
 
 namespace atFrameWork2.BaseFramework
@@ -19,7 +20,7 @@ namespace atFrameWork2.BaseFramework
         /// <param name="title">Название тесткейса</param>
         /// <param name="body">Ссылка на метод тела кейса</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public TestCase(string title, Action<PortalHomePage> body)
+        public TestCase(string title, Action<MainPage> body)
         {
             Title = title ?? throw new ArgumentNullException(nameof(title));
             Body = body ?? throw new ArgumentNullException(nameof(body));
@@ -125,7 +126,7 @@ namespace atFrameWork2.BaseFramework
         }
 
         public string Title { get; set; }
-        Action<PortalHomePage> Body { get; set; }
+        Action<MainPage> Body { get; set; }
         Action<MobileHomePage> MobileBody { get; set; }
         public TestCaseTreeNode Node { get; set; }
         public string CaseLogPath { get; set; }

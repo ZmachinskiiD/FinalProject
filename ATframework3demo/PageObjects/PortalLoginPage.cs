@@ -19,17 +19,17 @@ namespace atFrameWork2.PageObjects
             Driver = driver;
         }
 
-        public PortalHomePage Login(User admin)
+        public MainPage Login(User admin)
         {
             WebDriverActions.OpenUri(portalInfo.PortalUri, Driver);
-            var loginField = new WebItem("//input[@id='login' or @name='USER_LOGIN']", "Поле для ввода логина");
-            var pwdField = new WebItem("//input[@id='password' or @name='USER_PASSWORD']", "Поле для ввода пароля");
+            var loginField = new WebItem("//input[@name='login']", "Поле для ввода логина");
+            var pwdField = new WebItem("//input[@name='password']", "Поле для ввода пароля");
             loginField.SendKeys(admin.LoginAkaEmail, Driver);
             if (!pwdField.WaitElementDisplayed(1, Driver))
                 loginField.SendKeys(Keys.Enter, Driver);
             pwdField.SendKeys(admin.Password, Driver, logInputtedText: false);
             pwdField.SendKeys(Keys.Enter, Driver);
-            return new PortalHomePage(Driver);
+            return new MainPage(Driver);
         }
     }
 }
