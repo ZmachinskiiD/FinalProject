@@ -16,6 +16,10 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="135.0.7049.8400" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="PageObjects\Constsructor\" />
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="dotnet publish ATframework3demo.csproj -c:Debug --no-build" />
   </Target>
