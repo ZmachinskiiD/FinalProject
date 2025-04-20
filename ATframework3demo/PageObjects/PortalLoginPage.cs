@@ -31,5 +31,12 @@ namespace atFrameWork2.PageObjects
             pwdField.SendKeys(Keys.Enter, Driver);
             return new MainPage(Driver);
         }
+        public MainPage NoLogin()
+        {
+            WebDriverActions.OpenUri(portalInfo.PortalUri, Driver);
+            var header = new Header();
+            header.GoToMain();
+            return new MainPage(Driver);
+        }
     }
 }

@@ -19,11 +19,13 @@ namespace atFrameWork2.BaseFramework
         /// </summary>
         /// <param name="title">Название тесткейса</param>
         /// <param name="body">Ссылка на метод тела кейса</param>
+        /// /// <param name="auth">Проход авторизованным пользователем</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public TestCase(string title, Action<MainPage> body)
+        public TestCase(string title, Action<MainPage> body, bool auth = true)
         {
             Title = title ?? throw new ArgumentNullException(nameof(title));
             Body = body ?? throw new ArgumentNullException(nameof(body));
+            Auth = auth;
             Node = new TestCaseTreeNode(title);
             EnvType = TestCaseEnvType.Web;
         }
@@ -55,10 +57,16 @@ namespace atFrameWork2.BaseFramework
                 if (TestPortal.PortalUri.Scheme == Uri.UriSchemeHttps)//не особо надёжная история, но для обучалки сойдет
                     IsCloud = true;
 
-                if (EnvType == TestCaseEnvType.Web)
+                if (EnvType == TestCaseEnvType.Web && Auth )
                 {
                     var portalLoginPage = new PortalLoginPage(TestPortal);
                     var homePage = portalLoginPage.Login(TestPortal.PortalAdmin);
+                    Body.Invoke(homePage);
+                }
+                else if (EnvType == TestCaseEnvType.Web && !Auth )
+                {
+                    var portalLoginPage = new PortalLoginPage(TestPortal);
+                    var homePage = portalLoginPage.NoLogin();
                     Body.Invoke(homePage);
                 }
                 else
@@ -127,6 +135,7 @@ namespace atFrameWork2.BaseFramework
 
         public string Title { get; set; }
         Action<MainPage> Body { get; set; }
+        public bool Auth { get; set; }
         Action<MobileHomePage> MobileBody { get; set; }
         public TestCaseTreeNode Node { get; set; }
         public string CaseLogPath { get; set; }
