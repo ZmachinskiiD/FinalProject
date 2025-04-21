@@ -1,0 +1,37 @@
+﻿using atFrameWork2.SeleniumFramework;
+using OpenQA.Selenium;
+
+namespace ATframework3demo.PageObjects
+{
+    public class HeaderPage
+    {
+        WebItem searchPageBtn =>
+            new WebItem("//a[@href='/']",
+                "Кнопка перехода на главную(поиск фестивалей)");
+
+        WebItem cabinetPageBtn =>
+            new WebItem("//div[@class='nav-desktop']//a[@href='/cabinet/']",
+                "Кнопка личный кабинет");
+
+        WebItem searchField =>
+            new WebItem("//input[@id='siteSearchInput']",
+                "Поле для ввода поиска");
+
+        WebItem searchBtn =>
+            new WebItem("//button[@id='siteSearchBtn']",
+                "Кнопка поиска");
+        public HeaderPage(IWebDriver driver = default)
+        {
+            Driver = driver;
+        }
+
+        public IWebDriver Driver { get; }
+
+        public SearchPage GoToMain()
+        {
+            //Клик в Написать сообщение
+            searchPageBtn.Click(); 
+            return new SearchPage(Driver);
+        }
+    }
+}

@@ -24,7 +24,7 @@ namespace atFrameWork2.TestCases
             };
         }
 
-        public static void CreateTask(MainPage homePage)
+        public static void CreateTask(SearchPage homePage)
         {
             Thread.Sleep(5000);
             

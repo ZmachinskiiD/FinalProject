@@ -21,7 +21,7 @@ namespace atFrameWork2.BaseFramework
         /// <param name="body">Ссылка на метод тела кейса</param>
         /// /// <param name="auth">Проход авторизованным пользователем</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public TestCase(string title, Action<MainPage> body, bool auth = true)
+        public TestCase(string title, Action<SearchPage> body, bool auth = true)
         {
             Title = title ?? throw new ArgumentNullException(nameof(title));
             Body = body ?? throw new ArgumentNullException(nameof(body));
@@ -134,7 +134,7 @@ namespace atFrameWork2.BaseFramework
         }
 
         public string Title { get; set; }
-        Action<MainPage> Body { get; set; }
+        Action<SearchPage> Body { get; set; }
         public bool Auth { get; set; }
         Action<MobileHomePage> MobileBody { get; set; }
         public TestCaseTreeNode Node { get; set; }

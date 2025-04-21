@@ -29,7 +29,7 @@ namespace atFrameWork2.SeleniumFramework
         /// <param name="user"></param>
         /// <param name="portal"></param>
         /// <returns></returns>
-        public static MainPage ReloginWithNewDefaultDriver(User user, PortalInfo portal)
+        public static SearchPage ReloginWithNewDefaultDriver(User user, PortalInfo portal)
         {
             WebItem.DefaultDriver.Quit();
             WebItem.DefaultDriver = default;

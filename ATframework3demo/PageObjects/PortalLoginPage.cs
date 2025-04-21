@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using ATframework3demo.PageObjects;
+using ATframework3demo.BaseFramework.BitrixCPinterraction;
 
 namespace atFrameWork2.PageObjects
 {
@@ -18,25 +19,42 @@ namespace atFrameWork2.PageObjects
         {
             Driver = driver;
         }
+        WebItem loginField =>
+            new WebItem("//input[@name='login']",
+                "Поле для ввода логина");
+        WebItem pwdField => 
+            new WebItem("//input[@name='password']",
+                "Поле для ввода пароля");
 
-        public MainPage Login(User admin)
+        WebItem rememberCheck =>
+            new WebItem("//input[@id='USER_REMEMBER']",
+                "Чек-бокс запомнить меня");
+
+        WebItem enterBtn =>
+            new WebItem("//button[@type='submit']",
+                "Кнопка войти");
+
+        WebItem pwdToggle =>
+            new WebItem("//i[contains(@class,'toggle-password')]",
+                "Глаз для пароля");
+
+
+        public SearchPage Login(User admin)
         {
-            WebDriverActions.OpenUri(portalInfo.PortalUri, Driver);
-            var loginField = new WebItem("//input[@name='login']", "Поле для ввода логина");
-            var pwdField = new WebItem("//input[@name='password']", "Поле для ввода пароля");
+            WebDriverActions.OpenUri(portalInfo.PortalUri, Driver);         
             loginField.SendKeys(admin.LoginAkaEmail, Driver);
             if (!pwdField.WaitElementDisplayed(1, Driver))
                 loginField.SendKeys(Keys.Enter, Driver);
             pwdField.SendKeys(admin.Password, Driver, logInputtedText: false);
-            pwdField.SendKeys(Keys.Enter, Driver);
-            return new MainPage(Driver);
+            enterBtn.Click();
+            return new SearchPage(Driver);
         }
-        public MainPage NoLogin()
+        public SearchPage NoLogin()
         {
             WebDriverActions.OpenUri(portalInfo.PortalUri, Driver);
-            var header = new Header();
+            var header = new HeaderPage();
             header.GoToMain();
-            return new MainPage(Driver);
+            return new SearchPage(Driver);
         }
     }
 }
