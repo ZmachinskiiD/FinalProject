@@ -17,6 +17,7 @@ namespace ATframework3demo.PageObjects.LK
         WebItem participateButton = new WebItem("//a[@href=\"#participation\"]", "Кнопка перехода на таб участвую");
         WebItem favoritesButton = new WebItem("//a[@href=\"#favorites\"]", "кнопка перехода на таб избранное");
         WebItem notificationButton = new WebItem("//a[@href=\"#notifications\"]", "кнопка перехода на таб уведомления");
+
         WebItem logoutButton = new WebItem("//button[@class=\"logout-btn\"]", "Кнопка выхода");
     }
 }
