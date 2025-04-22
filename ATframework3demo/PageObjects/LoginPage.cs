@@ -11,11 +11,16 @@ using ATframework3demo.BaseFramework.BitrixCPinterraction;
 
 namespace atFrameWork2.PageObjects
 {
-    class PortalLoginPage : BaseLoginPage
+    public class LoginPage
     {
-        IWebDriver Driver { get; }
-
-        public PortalLoginPage(PortalInfo portal, IWebDriver driver = default) : base(portal)
+        public IWebDriver Driver { get; }
+        public PortalInfo portalInfo;
+        public LoginPage(PortalInfo portal, IWebDriver driver = default)
+        {
+            Driver = driver;
+            portalInfo = portal;
+        }
+        public LoginPage(IWebDriver driver = default)
         {
             Driver = driver;
         }
@@ -37,11 +42,23 @@ namespace atFrameWork2.PageObjects
         WebItem pwdToggle =>
             new WebItem("//i[contains(@class,'toggle-password')]",
                 "Глаз для пароля");
+        WebItem regBtn =>
+            new WebItem("//a[@href='/register']",
+                "Кнопка перехода на регистрацию");
+
+        WebItem errorMessage =>
+            new WebItem("//div[@id='error-message']",
+                "Окно ошибки не правильно введен пароль или логин");
+        WebItem infoFavMessage =>
+            new WebItem("//div[@class='info-message' and contains(text(),'избранное')]",
+                "Сообщение об авторизации, для добавления в избранное");
+        WebItem infoParticipateMessage =>
+            new WebItem("//div[@class='info-message' and contains(text(),'избранное')]",
+                "Сообщение об авторизации, для участия в фестивале");
 
 
         public SearchPage Login(User admin)
-        {
-            WebDriverActions.OpenUri(portalInfo.PortalUri, Driver);         
+        {       
             loginField.SendKeys(admin.LoginAkaEmail, Driver);
             if (!pwdField.WaitElementDisplayed(1, Driver))
                 loginField.SendKeys(Keys.Enter, Driver);
@@ -51,10 +68,18 @@ namespace atFrameWork2.PageObjects
         }
         public SearchPage NoLogin()
         {
-            WebDriverActions.OpenUri(portalInfo.PortalUri, Driver);
             var header = new HeaderPage();
-            header.GoToMain();
+            header.GoToSearch();
             return new SearchPage(Driver);
+        }
+        public HeaderPage GoToHeader()
+        {
+            return new HeaderPage();
+        }
+        public RegisterPage GoToRegister()
+        {
+            regBtn.Click();
+            return new RegisterPage();
         }
     }
 }

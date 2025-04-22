@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using ATframework3demo.PageObjects;
+using atFrameWork2.PageObjects;
 
 
 namespace ATframework3demo.PageObjects
@@ -45,5 +46,41 @@ namespace ATframework3demo.PageObjects
         WebItem pwdToggle =>
             new WebItem("//i[contains(@class,'toggle-password')]",
                 "Глаз для пароля");
+
+        WebItem errorEmailMsg =>
+            new WebItem("//div[@id='error-message' and contains(text(),'email')]",
+                "Окно ошибки email уже существует");
+
+        WebItem errorPwdMsg =>
+            new WebItem("//div[@id='error-message' and contains(text(),'Пароль')]",
+                "Окно ошибки длины пароля");
+
+        public RegisterPage CompleteForm(User user)
+        {
+            emailField.SendKeys(user.LoginAkaEmail);
+            pwdField.SendKeys(user.Password);
+            nameField.SendKeys(user.Name);
+            lastNameField.SendKeys(user.LastName);
+            if (user.Organizer)
+            {
+                organizerCheck.Click();
+            }
+            return new RegisterPage();
+        }
+        
+        public LoginPage GoToLoginPage()
+        {
+            regBtn.Click();
+            return new LoginPage();
+        }
+        public HeaderPage SwitchToHeader()
+        {
+            return new HeaderPage();
+        }
+        public LoginPage CreateAccount()
+        {
+            regBtn.Click();
+            return new LoginPage();
+        }
     }
 }

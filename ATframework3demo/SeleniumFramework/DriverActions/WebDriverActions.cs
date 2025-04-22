@@ -33,7 +33,7 @@ namespace atFrameWork2.SeleniumFramework
         {
             WebItem.DefaultDriver.Quit();
             WebItem.DefaultDriver = default;
-            return new PortalLoginPage(portal)
+            return new LoginPage(portal)
                 .Login(user);
         }
 

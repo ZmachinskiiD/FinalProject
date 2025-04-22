@@ -1,4 +1,5 @@
-﻿using atFrameWork2.SeleniumFramework;
+﻿using atFrameWork2.PageObjects;
+using atFrameWork2.SeleniumFramework;
 using OpenQA.Selenium;
 
 namespace ATframework3demo.PageObjects
@@ -27,11 +28,16 @@ namespace ATframework3demo.PageObjects
 
         public IWebDriver Driver { get; }
 
-        public SearchPage GoToMain()
+        public SearchPage GoToSearch()
         {
             //Клик в Написать сообщение
             searchPageBtn.Click(); 
             return new SearchPage(Driver);
+        }
+        public LoginPage GoToLogin()
+        {
+            cabinetPageBtn.Click();
+            return new LoginPage();
         }
     }
 }
