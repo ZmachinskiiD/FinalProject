@@ -15,5 +15,26 @@ namespace ATframework3demo.PageObjects.Constructor
         WebItem VenueStep = new WebItem("//button[@id=\"step2\"]", "Кнопка перехода на страницу добавления площадок");
         WebItem EventStep = new WebItem("//button[@id=\"step3\"]", "Кнопка перехода на страницу добавления событий");
         WebItem MapStep = new WebItem("//button[@id=\"step4\"]", "Кнопка перехода на страницу добавления карты");
+
+        public ConstructorMainInfo goToMainInfo()
+        {
+            MainStep.Click();
+            return new ConstructorMainInfo(Driver);
+        }
+        public ConstructorVenuePage goToVenuePage()
+        {
+            VenueStep.Click();
+            return new ConstructorVenuePage(Driver);
+        }
+        public ConstructorEventPage goToEventPage()
+        {
+            EventStep.Click();
+            return new ConstructorEventPage(Driver);
+        }
+        public ConstructorMapForm goTomapPage()
+        {
+            MapStep.Click();
+            return new ConstructorMapForm(Driver);
+        }
     }
 }

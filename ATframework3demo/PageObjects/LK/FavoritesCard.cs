@@ -14,8 +14,18 @@ namespace ATframework3demo.PageObjects.LK
             Path = path;
         }
         WebItem moreButton => new WebItem(Path + "//a[@class='details-btn']", "Кнопка подробнее у карточки");
-        WebItem changeStatusButton => new WebItem(Path + "//i[contains(@class,'favorite')]", "Кнопка добавления/удаления в избранное");
-        //TODO разделить на две
-        //TODO Вернуться на таб метод
+        WebItem deleteFromFavoritesButton => new WebItem(Path + "//button[class='action-btn favorite active']", "Кнопка удаления из избранного");
+        WebItem addToFavoritesButton => new WebItem(Path + "//button[class='action-btn favorite']", "Кнопка добавления в избранное");
+        public  FavoriteTab returnToTab()
+        {
+            return new FavoriteTab(Driver);
+        }
+        public FestivalDetailPage goToDetail()
+
+        {
+            moreButton.Click();
+            return new FestivalDetailPage(Driver);
+        }
+
     }
 }

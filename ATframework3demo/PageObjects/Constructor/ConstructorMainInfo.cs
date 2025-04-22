@@ -1,4 +1,5 @@
 ﻿using atFrameWork2.SeleniumFramework;
+using ATframework3demo.TestEntities.Festivalia;
 using OpenQA.Selenium;
 
 namespace ATframework3demo.PageObjects.Constructor
@@ -16,11 +17,30 @@ namespace ATframework3demo.PageObjects.Constructor
         WebItem DescFullInput = new WebItem("//textarea[@id='festivalShortDesc']", "Поле ввода полного описани");
         WebItem StartInput = new WebItem("//input[@id='festivalStartAt']", "Поле вводы даты начала");
         WebItem EndInput = new WebItem("//input[@id='festivalEndAt']", "Поле ввода даты конца");
-        WebItem TagInput(string name) => new WebItem($"//option[contains(text(), '{name}')]", $"Выбор тэга по имени '{name}'  ");
+        WebItem TagInput = new WebItem("//input[@class='select2-search__field']", "Оле выбора тэга");
+        WebItem TagSearch(string name) => new WebItem($"//option[contains(text(), '{name}')]", $"Выбор тэга по имени '{name}'  ");
 
 
         WebItem saveAsDraft= new WebItem("//button[@class='btn save-btn']", "Кнопка сохранения как черновик");
         //WebItem nextStep = new WebItem("//button[@class='btn next-btn']", "Кнопка перехода на следующий шаг ");
+
+        public ConstructorMainInfo passData(Festival festival)
+
+        {
+            photoInput.SendKeys(festival.PhotoPath);
+            NameInput.SendKeys(festival.Name);
+            DescInput.SendKeys(festival.ShortDescription);
+            DescFullInput.SendKeys(festival.Description);
+            StartInput.SendKeys(festival.DateStart);
+            EndInput.SendKeys(festival.DateEnd);
+            return new ConstructorMainInfo(Driver);
+        }
+        public ConstructorMainInfo selectTag(string name)
+        {
+            TagInput.Click();
+            TagSearch(name).Click();
+            return new ConstructorMainInfo(Driver);
+        }
 
     }
 }
