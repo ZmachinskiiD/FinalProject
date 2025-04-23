@@ -10,10 +10,14 @@ namespace ATframework3demo.PageObjects.Constructor
             Driver = driver;
         }
         IWebDriver Driver { get; }
-        WebItem photoInput = new WebItem("//input[@id='venueImage']", "Поле ввода фотографии");
-        WebItem NameInput = new WebItem("//input[@id='venueTitle']", "Поле ввода названия");
-        WebItem DescInput = new WebItem("//input[@id='venueShortDesc']", "Поле ввода кртакого описания");
-        WebItem DescFullInput = new WebItem("//textarea[@id='venueDescription']", "Поле ввода полного описания");
-        WebItem SaveBtn = new WebItem("//button[@id='saveVenue']", "Кнопка сохранения");
+
+        WebItem prevStep = new WebItem("//button[@class='btn back-btn']", "Кнопка перехода назад ");
+        WebItem saveCreateVenue = new WebItem("//button[@id=\"createVenueButton\"]", "Кнопка открытия площадки");
+        WebItem nextStep = new WebItem("//button[@class='btn next-btn']", "Кнопка перехода на следующий шаг ");
+
+        public ConstructorVenueForm OpenVenueForm()
+        {
+            return new ConstructorVenueForm(Driver);
+        }
     }
 }

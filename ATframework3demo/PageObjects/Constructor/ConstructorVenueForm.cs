@@ -1,4 +1,5 @@
 ﻿using atFrameWork2.SeleniumFramework;
+using ATframework3demo.TestEntities.Festivalia;
 using OpenQA.Selenium;
 
 namespace ATframework3demo.PageObjects.Constructor
@@ -10,9 +11,24 @@ namespace ATframework3demo.PageObjects.Constructor
             Driver = driver;
         }
         IWebDriver Driver { get; }
-
-        WebItem prevStep = new WebItem("//button[@class='btn back-btn']", "Кнопка перехода назад ");
-        WebItem saveCreateVenue = new WebItem("//button[@id=\"createVenueButton\"]", "Кнопка открытия площадки");
-        WebItem nextStep = new WebItem("//button[@class='btn next-btn']", "Кнопка перехода на следующий шаг ");
+        WebItem photoInput = new WebItem("//input[@id='venueImage']", "Поле ввода фотографии");
+        WebItem NameInput = new WebItem("//input[@id='venueTitle']", "Поле ввода названия");
+        WebItem DescInput = new WebItem("//input[@id='venueShortDesc']", "Поле ввода кртакого описания");
+        WebItem DescFullInput = new WebItem("//textarea[@id='venueDescription']", "Поле ввода полного описания");
+        WebItem SaveBtn = new WebItem("//button[@id='saveVenue']", "Кнопка сохранения");
+        
+        public ConstructorVenueForm passData(Venue venue)
+        {
+            photoInput.SendKeys(venue.PhotoPath);
+            NameInput.SendKeys(venue.Name);
+            DescFullInput.SendKeys(venue.Description);
+            DescInput.SendKeys(venue.ShortDescription);
+            return new ConstructorVenueForm(Driver);
+        }
+        public ConstructorVenuePage saveChanges()
+        {
+            SaveBtn.Click();
+            return new ConstructorVenuePage(Driver);
+        }
     }
 }

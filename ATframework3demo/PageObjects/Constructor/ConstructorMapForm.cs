@@ -1,4 +1,5 @@
 ﻿using atFrameWork2.SeleniumFramework;
+using ATframework3demo.TestEntities.Festivalia;
 using OpenQA.Selenium;
 
 namespace ATframework3demo.PageObjects.Constructor
@@ -13,6 +14,15 @@ namespace ATframework3demo.PageObjects.Constructor
         WebItem MapInput = new WebItem("//input[@id=\"festivalMap\"]", "Поле добавления карты");
         WebItem ConfirmAreaButton = new WebItem("//button[@id=\"saveMap\"]", "Кнопка подтверждения областей");
         WebItem PublishButton = new WebItem("//button[@id=\"publishFestival\"]", "Кнопка опубликования");
+        public ConstructorMapForm addMap(Festival festival)
+        {
+            MapInput.SendKeys(festival.MapPath);
+            return new ConstructorMapForm(Driver);
+        }
+        public ConstructorConfirmPublication publishFestival()
+        {
+            return new ConstructorConfirmPublication(Driver);
+        }
     }
     
 

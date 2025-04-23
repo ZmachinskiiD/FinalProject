@@ -11,5 +11,10 @@ namespace ATframework3demo.PageObjects.Constructor
         }
         IWebDriver Driver { get; }
         WebItem addEventToVenueBtn(string name) => new WebItem($"//div[@class='venue-events-block'][.//h3[contains(text(), '{name}')]]//button[@class='btn add-event-btn']", "Кнопка добавления события на площадку");
+        public ConstructorEventForm OpenEventFormForVenueByName(string name)
+        {
+            addEventToVenueBtn(name).Click();
+            return new ConstructorEventForm(Driver);
+        }
     }
 }
