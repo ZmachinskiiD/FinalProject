@@ -36,7 +36,7 @@ namespace ATframework3demo.PageObjects
             new WebItem("//div[@class='no-festivals-message']",
                 "Сообщение об отсутствие фестивалей");
 
-        public HeaderPage SwitchToHeader()
+        public HeaderPage GoToHeader()
         {
             return new HeaderPage();
         }

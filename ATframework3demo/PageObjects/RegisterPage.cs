@@ -73,7 +73,7 @@ namespace ATframework3demo.PageObjects
             regBtn.Click();
             return new LoginPage();
         }
-        public HeaderPage SwitchToHeader()
+        public HeaderPage GoToHeader()
         {
             return new HeaderPage();
         }

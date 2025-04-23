@@ -20,7 +20,7 @@ namespace ATframework3demo.TestCases
         {
             User testUser = new User("ptichka@mail.ru", true);
             homePage
-                .SwitchToHeader()
+                .GoToHeader()
                 .GoToLogin()
                 .GoToRegister()
                 .CompleteForm(testUser)
