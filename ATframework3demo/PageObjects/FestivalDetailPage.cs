@@ -27,6 +27,12 @@ namespace ATframework3demo.PageObjects
             new WebItem("//canvas[@id='mapCanvas']",
                 "Карта фестиваля");
 
+        public VenuePosterPage GetVenueByName(string name)
+        {
+            string path = $"//h3[text()='{name}']/ancestor::article[@class='venue-card']";
+            return new VenuePosterPage(path);
+        }
+
 
     }
 }

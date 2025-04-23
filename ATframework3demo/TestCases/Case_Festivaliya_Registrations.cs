@@ -15,10 +15,12 @@ namespace ATframework3demo.TestCases
 
             };
         }
-
+    
         public static void CreateAccount(SearchPage homePage)
         {
-            User testUser = new User("ptichka@mail.ru", true);
+            var epochTime = new DateTime(1, 1, 1, 0, 0, 0);
+            string unEmail = (DateTime.Now - epochTime).TotalSeconds.ToString().Replace(',', '1') + "@mail.ru";
+            User testUser = new User(unEmail, true);
             homePage
                 .GoToHeader()
                 .GoToLogin()

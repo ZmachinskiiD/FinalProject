@@ -18,20 +18,7 @@ namespace ATframework3demo.PageObjects
 
         WebItem tagBtn(string name) =>
             new WebItem($"//section[@class='tag-filters']//div[contains(@class,'tag') and contains(text(),'{name}')]",
-                $"Тег с названием {name}");
-
-        WebItem likeBtn(string name) =>
-            new WebItem($"//img[@alt='{name}']/following::button[contains(@class,'action-btn favorite')]",
-                $"Кнопка добавить в ибзранное по названию фестиваля: {name}");
-
-        WebItem participateBtn(string name) =>
-            new WebItem($"//img[@alt='{name}']/following::button[contains(@class,'action-btn participate')]",
-                $"Кнопка добавить участвую по названию фестиваля: {name}");
-
-        WebItem detailBtn(string name) =>
-            new WebItem($"//img[@alt='{name}']/following::a[contains(@class,'details-btn')]",
-                $"Кнопка подробнее о фестивале по названию {name}");
-
+                $"Тег с названием {name}");  
         WebItem emptyStateMessage =>
             new WebItem("//div[@class='no-festivals-message']",
                 "Сообщение об отсутствие фестивалей");
@@ -39,6 +26,12 @@ namespace ATframework3demo.PageObjects
         public HeaderPage GoToHeader()
         {
             return new HeaderPage();
+        }
+
+        public FestivalPosterPage GetFestivalPosterByName(string name)
+        {
+            string path = $"//img[@alt='{name}']/ancestor::article[@class='festival-card'][1]";
+            return new FestivalPosterPage(path);
         }
 
     }
