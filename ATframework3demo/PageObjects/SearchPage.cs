@@ -7,6 +7,7 @@ namespace ATframework3demo.PageObjects
     {
         public SearchPage(IWebDriver driver = default)
         {
+            activeCheck.WaitElementDisplayed();
             Driver = driver;
         }
         public IWebDriver Driver { get; }
