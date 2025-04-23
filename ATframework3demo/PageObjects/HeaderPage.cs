@@ -1,5 +1,6 @@
 ﻿using atFrameWork2.PageObjects;
 using atFrameWork2.SeleniumFramework;
+using ATframework3demo.PageObjects.LK;
 using OpenQA.Selenium;
 
 namespace ATframework3demo.PageObjects
@@ -38,6 +39,11 @@ namespace ATframework3demo.PageObjects
         {
             cabinetPageBtn.Click();
             return new LoginPage();
+        }
+        public LKLeftMenu GoToLK()
+        {
+            cabinetPageBtn.Click();
+            return new LKLeftMenu();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using atFrameWork2.SeleniumFramework;
+using ATframework3demo.PageObjects.Constructor;
 using OpenQA.Selenium;
 
 namespace ATframework3demo.PageObjects.LK
@@ -19,6 +20,11 @@ namespace ATframework3demo.PageObjects.LK
         {
             string path = $"//div[@class='festival-card'][.//h3[text()='{name}']]";
             return new MyFestivalCard(path);
+        }
+        public ConstructorMainInfo goToConstructor()
+        {
+            сreateFestivalButton.Click();
+            return new ConstructorMainInfo();
         }
     }
     
