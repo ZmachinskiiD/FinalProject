@@ -15,7 +15,7 @@ namespace ATframework3demo.PageObjects.LK
             Path = path;
         }
         WebItem moreButton => new WebItem(Path + "//a[@class='details-btn']", "Кнопка подробнее у карточки");
-        WebItem changeStatusButton => new WebItem(Path + "//i[contains(@class,'fa-toggle')]", "Кнопка переключения статуса");\
+        WebItem changeStatusButton => new WebItem(Path + "//i[contains(@class,'fa-toggle')]", "Кнопка переключения статуса");
         public MyFestivalTab returnToTab()
         {
             return new MyFestivalTab(Driver);
