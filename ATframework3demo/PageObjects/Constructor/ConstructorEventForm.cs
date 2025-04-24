@@ -15,8 +15,8 @@ namespace ATframework3demo.PageObjects.Constructor
         WebItem NameInput = new WebItem("//input[@id='eventTitle']", "Поле ввода названия");
         WebItem DescInput = new WebItem("//textarea[@id=\"eventDescription\"]", "Поле ввода описани");
         WebItem StartInput = new WebItem("//input[@id=\"eventStartAt\"]", "Поле ввода начала");
-        WebItem EndInput = new WebItem("///input[@id=\"eventEndAt\"]", "Поле ввода конца");
-        WebItem BtnSave = new WebItem("///button[@id=\"saveEvent\"]", "Кнопка сохранения события");
+        WebItem EndInput = new WebItem("//input[@id=\"eventEndAt\"]", "Поле ввода конца");
+        WebItem BtnSave = new WebItem("//button[@id=\"saveEvent\"]", "Кнопка сохранения события");
 
         public ConstructorEventPage saveChanges()
         {
@@ -28,8 +28,12 @@ namespace ATframework3demo.PageObjects.Constructor
             photoInput.SendKeys(Event.PhotoPath);
             NameInput.SendKeys(Event.Name);
             DescInput.SendKeys(Event.Description);
-            StartInput.SendKeys(Event.DateTimeStart);
-           EndInput.SendKeys(Event.DateTimeEnd);
+            StartInput.SendKeys(Event.DateStart);
+            StartInput.SendKeys(Keys.ArrowRight);
+            StartInput.SendKeys(Event.TimeStart);
+            EndInput.SendKeys(Event.DateEnd);
+            EndInput.SendKeys(Keys.ArrowRight);
+            EndInput.SendKeys(Event.TimeEnd);
             return new ConstructorEventForm(Driver);
         }
 

@@ -26,6 +26,14 @@ namespace ATframework3demo.PageObjects.LK
             moreButton.Click();
             return new FestivalDetailPage(Driver);
         }
+        public void findTheFestival()
+        {
+            if (!(moreButton.WaitElementDisplayed()))
+            {
+                throw new Exception("Не найден фестиваль в ЛК");
+            }
+
+        }
 
     }
 }

@@ -9,7 +9,8 @@ namespace ATframework3demo.TestEntities.Festivalia
         public string MapPath { get; set; }
         public string DateStart { get; set; }
         public string DateEnd { get; set; }
-        public Festival(string name, string shortDescription, string photoPath, string description,string dateStart,string dateEnd,string? mapPath=null)
+        public string Tag { get; set; }
+        public Festival(string name, string shortDescription, string photoPath, string description,string dateStart,string dateEnd, string tag, string? mapPath=null)
         {
             PhotoPath = photoPath;
             Name = name;
@@ -18,6 +19,7 @@ namespace ATframework3demo.TestEntities.Festivalia
             DateStart = dateStart;
             DateEnd = dateEnd;
             MapPath = mapPath;
+            Tag = tag;
 
         }
     }

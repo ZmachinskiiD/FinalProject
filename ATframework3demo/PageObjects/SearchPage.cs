@@ -1,5 +1,7 @@
 ﻿using atFrameWork2.SeleniumFramework;
+using ATframework3demo.TestEntities.Festivalia;
 using OpenQA.Selenium;
+using System.Xml.Linq;
 
 namespace ATframework3demo.PageObjects
 {
@@ -26,6 +28,17 @@ namespace ATframework3demo.PageObjects
         public HeaderPage GoToHeader()
         {
             return new HeaderPage();
+        }
+        public void findTheFestival(string name)
+        {
+            WebItem festivalName =
+             new WebItem($"//article[@class=\"festival-card\"][.//h3[contains(text(), '{name}')]]",
+                $"Кнопка подробнее о фестивале по названию {name}");
+            if (!(festivalName.WaitElementDisplayed()))
+            {
+                throw new Exception("Не найден фестиваль на главной");
+            }
+
         }
 
         public FestivalPosterPage GetFestivalPosterByName(string name)

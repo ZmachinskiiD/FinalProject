@@ -17,6 +17,7 @@ namespace ATframework3demo.PageObjects.Constructor
 
         public ConstructorVenueForm OpenVenueForm()
         {
+            saveCreateVenue.Click();
             return new ConstructorVenueForm(Driver);
         }
     }

@@ -21,6 +21,7 @@ namespace ATframework3demo.PageObjects.Constructor
         }
         public ConstructorConfirmPublication publishFestival()
         {
+            PublishButton.Click();
             return new ConstructorConfirmPublication(Driver);
         }
     }

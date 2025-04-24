@@ -19,6 +19,16 @@ namespace ATframework3demo.BaseFramework
                 res = res[(res.Length - maxLength)..];
             return res;
         }
+        public static string getDate()
+        {
+            DateTime tomorrow = DateTime.Today;
+            return tomorrow.ToString("dd.MM.yyyy");
+        }
+        public static string getTimeOfFestival(int minutesFromNow)
+        {
+            var Time = DateTime.Now.AddMinutes(minutesFromNow);
+            return Time.ToString("HH:mm");
+        }
 
         /// <summary>
         /// Превращает арабскую цифру в псевдоримскую, каждые 2 разряда конвертит в римскую
