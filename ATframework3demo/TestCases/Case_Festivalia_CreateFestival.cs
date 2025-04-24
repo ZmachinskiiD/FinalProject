@@ -27,8 +27,8 @@ namespace ATframework3demo.TestCases
                 var description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
                 var dateStart = HelperMethods.getDate();
                 var dateEnd = HelperMethods.getDate();
-                var timeStart = HelperMethods.getTimeOfFestival(10);
-                var timeEnd = HelperMethods.getTimeOfFestival(20);
+                var timeStart = HelperMethods.getTimeOfFestival(7);
+                var timeEnd = HelperMethods.getTimeOfFestival(10);
 
                 var festival = new Festival(name, shortdesc, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description, dateStart, dateEnd, "Музыка", "\"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp\"");
                 var venue = new Venue(name, shortdesc, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description);
