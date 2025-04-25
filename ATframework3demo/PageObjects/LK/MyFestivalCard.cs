@@ -15,24 +15,29 @@ namespace ATframework3demo.PageObjects.LK
             Path = path;
         }
         WebItem moreButton => new WebItem(Path + "//a[@class='details-btn']", "Кнопка подробнее у карточки");
-        WebItem changeStatusButton => new WebItem(Path + "//i[contains(@class,'fa-toggle')]", "Кнопка переключения статуса");
-        public MyFestivalTab returnToTab()
+        //WebItem changeStatusButton => new WebItem(Path + "//i[contains(@class,'fa-toggle')]", "Кнопка переключения статуса");
+        WebItem menuButton => new WebItem(Path + "//button[class=\"dropdown-toggle\"]", "Кнопка открывающая меню на карточке");
+        public MyFestivalTab ReturnToTab()
         {
             return new MyFestivalTab(Driver);
         }
-        public FestivalDetailPage goToDetail()
+        public FestivalDetailPage GoToDetail()
 
         {
             moreButton.Click();
             return new FestivalDetailPage(Driver);
         }
-        public void findTheFestival()
+        public void FindTheFestival()
         {
             if (!(moreButton.WaitElementDisplayed()))
             {
                 throw new Exception("Не найден фестиваль в ЛК");
             }
 
+        }
+        public void OpenMenu()
+        {
+            menuButton.Click();
         }
 
     }

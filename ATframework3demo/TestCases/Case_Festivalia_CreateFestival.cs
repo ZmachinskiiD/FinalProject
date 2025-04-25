@@ -49,8 +49,8 @@ namespace ATframework3demo.TestCases
                     saveChanges();
                 upperTab.goToEventPage().OpenEventFormForVenueByName(venue.Name).passData(EEvent).saveChanges();
                 upperTab.goTomapPage().publishFestival().Publish().
-                    //findTheFestival(festival.Name);
-                    GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name).findTheFestival();
+                    //FindTheFestival(festival.Name);
+                    GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name).FindTheFestival();
 
 
             }
@@ -71,7 +71,7 @@ namespace ATframework3demo.TestCases
                 var header = new HeaderPage();
                 Console.WriteLine(festival.Name);
                 header.GoToSearch().GoToHeader().
-                    GoToLK().GoToMyFestivalsTab().GoToDrafts().GetFestivalCardByName(festival.Name).findTheFestival();
+                    GoToLK().GoToMyFestivalsTab().GoToDrafts().GetFestivalCardByName(festival.Name).FindTheFestival();
 
             }
             public static void CreateDateStartBiggerthanDateEnd(SearchPage homePage)
