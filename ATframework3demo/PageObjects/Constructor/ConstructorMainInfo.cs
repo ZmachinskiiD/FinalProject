@@ -18,33 +18,43 @@ namespace ATframework3demo.PageObjects.Constructor
         WebItem StartInput = new WebItem("//input[@id='festivalStartAt']", "Поле вводы даты начала");
         WebItem EndInput = new WebItem("//input[@id='festivalEndAt']", "Поле ввода даты конца");
         WebItem TagInput = new WebItem("//input[@class='select2-search__field']", "Оле выбора тэга");
+        WebItem ErrorWarning = new WebItem("//div[@class='notification error show' ]", "Всплывающее уведомление об ошибке");
         WebItem TagSearch(string name) => new WebItem($"//option[contains(text(), '{name}')]", $"Выбор тэга по имени '{name}'  ");
 
 
         WebItem saveAsDraft= new WebItem("//button[@id=\"saveFestivalDetails\"]", "Кнопка сохранения как черновик");
         //WebItem nextStep = new WebItem("//button[@class='btn next-btn']", "Кнопка перехода на следующий шаг ");
 
-        public ConstructorMainInfo passData(Festival festival)
+        public ConstructorMainInfo PassData(Festival festival)
 
         {
             photoInput.SendKeys(festival.PhotoPath);
             NameInput.SendKeys(festival.Name);
             DescInput.SendKeys(festival.ShortDescription);
             DescFullInput.SendKeys(festival.Description);
-            StartInput.SendKeys(festival.DateStart);
             EndInput.SendKeys(festival.DateEnd);
+            StartInput.SendKeys(festival.DateStart);
             return new ConstructorMainInfo(Driver);
         }
-        public ConstructorMainInfo selectTag(string name)
+        public ConstructorMainInfo SelectTag(string name)
         {
             TagInput.SendKeys(name);
             TagInput.SendKeys(Keys.Enter);
             return new ConstructorMainInfo(Driver);
         }
-        public ConstructorMainInfo saveData()
+        public ConstructorMainInfo SaveData()
         {
             saveAsDraft.Click();
             return new ConstructorMainInfo(Driver);
+        }
+        public bool AssertIncorrectStartEndDate()
+        {
+            var result=ErrorWarning.AssertTextContains("Дата окончания не может быть раньше даты начала");
+            if (result == false)
+            {
+                throw new Exception("отстутсвует уведомление об ошибке");
+            }
+            return result;
         }
 
     }

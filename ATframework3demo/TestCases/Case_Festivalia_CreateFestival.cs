@@ -16,6 +16,8 @@ namespace ATframework3demo.TestCases
                 return new List<TestCase>
             {
                 new TestCase("Создание фестиваля", homePage => CreateFestival(homePage)),
+                new TestCase("Создание черновика фестиваля", homePage => CreateFestivalDraft(homePage)),
+                new TestCase("Создание фестиваля c датой начала больше даты конца", homePage => CreateDateStartBiggerthanDateEnd(homePage)),
 
             };
             }
@@ -23,7 +25,7 @@ namespace ATframework3demo.TestCases
             public static void CreateFestival(SearchPage homePage)
             {
                 var name = "Название" + HelperMethods.GetDateTimeSaltString(true, 4);
-                var shortdesc="Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
+                var shortdesc = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
                 var description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
                 var dateStart = HelperMethods.getDate();
                 var dateEnd = HelperMethods.getDate();
@@ -34,11 +36,11 @@ namespace ATframework3demo.TestCases
                 var venue = new Venue(name, shortdesc, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description);
                 var EEvent = new Event(name, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description, dateStart, dateEnd, timeStart, timeEnd);
                 var header = new HeaderPage();
-                header.GoToLK().goToMyFestivalsTab().
-                    goToConstructor().
-                    passData(festival)
-                   .selectTag(festival.Tag)
-                   .saveData();
+                header.GoToLK().GoToMyFestivalsTab().
+                    GoToConstructor().
+                    PassData(festival)
+                   .SelectTag(festival.Tag)
+                   .SaveData();
                 var upperTab = new ConstructorUpperTab();
                 upperTab.
                     goToVenuePage().
@@ -48,7 +50,42 @@ namespace ATframework3demo.TestCases
                 upperTab.goToEventPage().OpenEventFormForVenueByName(venue.Name).passData(EEvent).saveChanges();
                 upperTab.goTomapPage().publishFestival().Publish().
                     //findTheFestival(festival.Name);
-                    GoToHeader().GoToLK().goToMyFestivalsTab().getFestivalCardByName(festival.Name).findTheFestival();
+                    GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name).findTheFestival();
+
+
+            }
+            public static void CreateFestivalDraft(SearchPage homePage)
+            {
+                var name = "Название" + HelperMethods.GetDateTimeSaltString(true, 4);
+                var shortdesc = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
+                var description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
+                var dateStart = HelperMethods.getDate();
+                var dateEnd = HelperMethods.getDate();
+                var photoPath = @"C:\\Users\\Admin\\source\\repos\\FinalProject\\ATlearning\\ATframework3demo\\TestData\\festivalCover.webp";
+                var festival = new Festival(name, shortdesc, photoPath, description, dateStart, dateEnd, "Музыка",null);
+                homePage.GoToHeader().GoToLK().GoToMyFestivalsTab().
+                    GoToConstructor().
+                    PassData(festival)
+                   .SelectTag(festival.Tag)
+                   .SaveData();
+                var header = new HeaderPage();
+                Console.WriteLine(festival.Name);
+                header.GoToSearch().GoToHeader().
+                    GoToLK().GoToMyFestivalsTab().GoToDrafts().GetFestivalCardByName(festival.Name).findTheFestival();
+
+            }
+            public static void CreateDateStartBiggerthanDateEnd(SearchPage homePage)
+            {
+                var name = "Название" + HelperMethods.GetDateTimeSaltString(true, 4);
+                var shortdesc = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
+                var description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
+                var dateStart = HelperMethods.getDate(2);
+                var dateEnd = HelperMethods.getDate(1);
+                var photoPath = @"C:\\Users\\Admin\\source\\repos\\FinalProject\\ATlearning\\ATframework3demo\\TestData\\festivalCover.webp";
+                var festival = new Festival(name, shortdesc, photoPath, description, dateStart, dateEnd, "Музыка", null);
+                homePage.GoToHeader().GoToLK().GoToMyFestivalsTab().
+                    GoToConstructor().
+                    PassData(festival).AssertIncorrectStartEndDate();
 
 
             }

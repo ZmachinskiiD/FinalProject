@@ -13,7 +13,7 @@ namespace ATframework3demo.PageObjects.Constructor
         IWebDriver Driver { get; }
         WebItem photoInput = new WebItem("//input[@id=\"eventImage\"]", "Поле ввода фотографии");
         WebItem NameInput = new WebItem("//input[@id='eventTitle']", "Поле ввода названия");
-        WebItem DescInput = new WebItem("//textarea[@id=\"eventDescription\"]", "Поле ввода описани");
+        WebItem DescInput = new WebItem("//input[@id=\"eventDescription\"]", "Поле ввода описани");
         WebItem StartInput = new WebItem("//input[@id=\"eventStartAt\"]", "Поле ввода начала");
         WebItem EndInput = new WebItem("//input[@id=\"eventEndAt\"]", "Поле ввода конца");
         WebItem BtnSave = new WebItem("//button[@id=\"saveEvent\"]", "Кнопка сохранения события");

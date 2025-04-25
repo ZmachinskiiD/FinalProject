@@ -24,7 +24,7 @@ namespace ATframework3demo.PageObjects.LK
             myDataButton.Click();
             return new MyDataTab(Driver);
         }
-        public MyFestivalTab goToMyFestivalsTab()
+        public MyFestivalTab GoToMyFestivalsTab()
         {
             myFestButton.Click();
             return new MyFestivalTab(Driver);
