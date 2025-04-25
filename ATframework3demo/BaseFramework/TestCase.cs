@@ -20,11 +20,10 @@ namespace atFrameWork2.BaseFramework
         /// <param name="body">Ссылка на метод тела кейса</param>
         /// /// <param name="auth">Проход авторизованным пользователем</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public TestCase(string title, Action<SearchPage> body, bool auth = true)
+        public TestCase(string title, Action<SearchPage> body)
         {
             Title = title ?? throw new ArgumentNullException(nameof(title));
             Body = body ?? throw new ArgumentNullException(nameof(body));
-            Auth = auth;
             Node = new TestCaseTreeNode(title);
             EnvType = TestCaseEnvType.Web;
         }
@@ -52,10 +51,9 @@ namespace atFrameWork2.BaseFramework
 
                 if (EnvType == TestCaseEnvType.Web)
                 {
-                    var portalLoginPage = new LoginPage(TestPortal);
-                    WebDriverActions.OpenUri(portalLoginPage.portalInfo.PortalUri, portalLoginPage.Driver);
-                    var homePage = Auth ? portalLoginPage.Login(TestPortal.PortalAdmin) : portalLoginPage.NoLogin();
-                    Body.Invoke(homePage);
+                    var portalSearchPage = new SearchPage(TestPortal);
+                    WebDriverActions.OpenUri(portalSearchPage.PortalInfo.PortalUri, portalSearchPage.Driver);
+                    Body.Invoke(portalSearchPage);
                 } 
                 
 
@@ -118,7 +116,7 @@ namespace atFrameWork2.BaseFramework
 
         public string Title { get; set; }
         Action<SearchPage> Body { get; set; }
-        public bool Auth { get; set; }
+
         public TestCaseTreeNode Node { get; set; }
         public string CaseLogPath { get; set; }
         public List<LogMessage> CaseLog { get; } = new List<LogMessage>();

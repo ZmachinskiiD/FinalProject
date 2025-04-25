@@ -11,14 +11,22 @@ namespace ATframework3demo.TestCases
         {
             return new List<TestCase>
             {
-                new TestCase("Создание аккаунта", homePage => CreateAccount(homePage), false),
+                new TestCase("Создание аккаунта", homePage => CreateAccount(homePage)),
+                new TestCase("Болванка", homePage => TestMethod(homePage)),
 
             };
         }
-    
+
+        private void TestMethod(SearchPage homePage)
+        {
+            var testUser = new User("aaa@mail.ru");
+            homePage.GoToHeader().GoToLogin().Login(testUser);
+        }
+
         public static void CreateAccount(SearchPage homePage)
         {
             var epochTime = new DateTime(1, 1, 1, 0, 0, 0);
+
             string unEmail = (DateTime.Now - epochTime).TotalSeconds.ToString().Replace(',', '1') + "@mail.ru";
             User testUser = new User(unEmail, true);
             homePage
@@ -29,5 +37,6 @@ namespace ATframework3demo.TestCases
                 .CreateAccount();
 
         }
+
     }
 }

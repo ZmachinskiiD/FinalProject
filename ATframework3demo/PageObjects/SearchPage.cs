@@ -1,5 +1,4 @@
 ﻿using atFrameWork2.SeleniumFramework;
-using ATframework3demo.TestEntities.Festivalia;
 using OpenQA.Selenium;
 using System.Xml.Linq;
 
@@ -12,7 +11,15 @@ namespace ATframework3demo.PageObjects
             activeCheck.WaitElementDisplayed();
             Driver = driver;
         }
+        public SearchPage(PortalInfo portal,IWebDriver driver = default)
+        {
+            activeCheck.WaitElementDisplayed();
+            Driver = driver;
+            PortalInfo = portal;
+        }
+        
         public IWebDriver Driver { get; }
+        public PortalInfo PortalInfo { get; }
 
         WebItem activeCheck =>
             new WebItem("//input[@id='activeFilter']",

@@ -14,7 +14,7 @@ namespace atFrameWork2.PageObjects
     public class LoginPage
     {
         public IWebDriver Driver { get; }
-        public PortalInfo portalInfo;
+        public PortalInfo portalInfo { get; }
         public LoginPage(PortalInfo portal, IWebDriver driver = default)
         {
             Driver = driver;
