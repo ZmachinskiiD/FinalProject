@@ -19,7 +19,7 @@ namespace ATframework3demo.TestCases
 
         private void TestMethod(SearchPage homePage)
         {
-            var testUser = new User("aaa@mail.ru");
+            var testUser = new User();
             homePage.GoToHeader().GoToLogin().Login(testUser);
         }
 
@@ -28,7 +28,7 @@ namespace ATframework3demo.TestCases
             var epochTime = new DateTime(1, 1, 1, 0, 0, 0);
 
             string unEmail = (DateTime.Now - epochTime).TotalSeconds.ToString().Replace(',', '1') + "@mail.ru";
-            User testUser = new User(unEmail, true);
+            User testUser = new User(true);
             homePage
                 .GoToHeader()
                 .GoToLogin()

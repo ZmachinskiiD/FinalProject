@@ -19,12 +19,12 @@ namespace ATframework3demo.BaseFramework
                 res = res[(res.Length - maxLength)..];
             return res;
         }
-        public static string getDate(int fromToday=0)
+        public static string GetDate(int fromToday=0)
         {
             DateTime tomorrow = DateTime.Today.AddDays(fromToday);
             return tomorrow.ToString("dd.MM.yyyy");
         }
-        public static string getTimeOfFestival(int minutesFromNow)
+        public static string GetTimeOfFestival(int minutesFromNow)
         {
             var Time = DateTime.Now.AddMinutes(minutesFromNow);
             return Time.ToString("HH:mm");

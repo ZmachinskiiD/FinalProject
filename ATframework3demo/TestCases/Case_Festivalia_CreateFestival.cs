@@ -24,13 +24,17 @@ namespace ATframework3demo.TestCases
 
             public static void CreateFestival(SearchPage homePage)
             {
+                var testUser = new User(true);
+                User.CreateUser(testUser);
+                homePage.GoToHeader().GoToLogin().Login(testUser);
+
                 var name = "Название" + HelperMethods.GetDateTimeSaltString(true, 4);
                 var shortdesc = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
                 var description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
-                var dateStart = HelperMethods.getDate();
-                var dateEnd = HelperMethods.getDate();
-                var timeStart = HelperMethods.getTimeOfFestival(7);
-                var timeEnd = HelperMethods.getTimeOfFestival(10);
+                var dateStart = HelperMethods.GetDate();
+                var dateEnd = HelperMethods.GetDate();
+                var timeStart = HelperMethods.GetTimeOfFestival(7);
+                var timeEnd = HelperMethods.GetTimeOfFestival(10);
 
                 var festival = new Festival(name, shortdesc, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description, dateStart, dateEnd, "Музыка", "\"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp\"");
                 var venue = new Venue(name, shortdesc, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description);
@@ -59,8 +63,8 @@ namespace ATframework3demo.TestCases
                 var name = "Название" + HelperMethods.GetDateTimeSaltString(true, 4);
                 var shortdesc = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
                 var description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
-                var dateStart = HelperMethods.getDate();
-                var dateEnd = HelperMethods.getDate();
+                var dateStart = HelperMethods.GetDate();
+                var dateEnd = HelperMethods.GetDate();
                 var photoPath = @"C:\\Users\\Admin\\source\\repos\\FinalProject\\ATlearning\\ATframework3demo\\TestData\\festivalCover.webp";
                 var festival = new Festival(name, shortdesc, photoPath, description, dateStart, dateEnd, "Музыка",null);
                 homePage.GoToHeader().GoToLK().GoToMyFestivalsTab().
@@ -79,8 +83,8 @@ namespace ATframework3demo.TestCases
                 var name = "Название" + HelperMethods.GetDateTimeSaltString(true, 4);
                 var shortdesc = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
                 var description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
-                var dateStart = HelperMethods.getDate(2);
-                var dateEnd = HelperMethods.getDate(1);
+                var dateStart = HelperMethods.GetDate(2);
+                var dateEnd = HelperMethods.GetDate(1);
                 var photoPath = @"C:\\Users\\Admin\\source\\repos\\FinalProject\\ATlearning\\ATframework3demo\\TestData\\festivalCover.webp";
                 var festival = new Festival(name, shortdesc, photoPath, description, dateStart, dateEnd, "Музыка", null);
                 homePage.GoToHeader().GoToLK().GoToMyFestivalsTab().
