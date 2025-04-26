@@ -19,9 +19,13 @@ namespace ATframework3demo.BaseFramework
                 res = res[(res.Length - maxLength)..];
             return res;
         }
-        public static string GetDate(int fromToday=0)
+        public static string GetDate(int fromToday=0,bool forConstuctor= false)
         {
             DateTime tomorrow = DateTime.Today.AddDays(fromToday);
+            if(forConstuctor=true)
+            {
+                return tomorrow.ToString("yyyy-MM-dd");
+            }
             return tomorrow.ToString("dd.MM.yyyy");
         }
         public static string GetTimeOfFestival(int minutesFromNow)

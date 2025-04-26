@@ -56,6 +56,15 @@ namespace ATframework3demo.PageObjects.Constructor
             }
             return result;
         }
+        public bool AssertStartDateIsIncorrect()
+        {
+            var result = ErrorWarning.AssertTextContains("Дата начала не может быть раньше сегодняшнего дня");
+            if (result == false)
+            {
+                throw new Exception("отстутсвует уведомление об ошибке");
+            }
+            return result;
+        }
 
     }
 }

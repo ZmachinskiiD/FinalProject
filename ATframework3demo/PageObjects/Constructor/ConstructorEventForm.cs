@@ -28,12 +28,14 @@ namespace ATframework3demo.PageObjects.Constructor
             photoInput.SendKeys(Event.PhotoPath);
             NameInput.SendKeys(Event.Name);
             DescInput.SendKeys(Event.Description);
-            StartInput.SendKeys(Event.DateStart);
-            StartInput.SendKeys(Keys.ArrowRight);
-            StartInput.SendKeys(Event.TimeStart);
+
             EndInput.SendKeys(Event.DateEnd);
             EndInput.SendKeys(Keys.ArrowRight);
             EndInput.SendKeys(Event.TimeEnd);
+
+            StartInput.SendKeys(Event.DateStart);
+            StartInput.SendKeys(Keys.ArrowRight);
+            StartInput.SendKeys(Event.TimeStart);
             return new ConstructorEventForm(Driver);
         }
 
