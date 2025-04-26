@@ -24,11 +24,8 @@ namespace ATframework3demo.TestCases
         }
 
         public static void CreateAccount(SearchPage homePage)
-        {
-            var epochTime = new DateTime(1, 1, 1, 0, 0, 0);
-
-            string unEmail = (DateTime.Now - epochTime).TotalSeconds.ToString().Replace(',', '1') + "@mail.ru";
-            User testUser = new User(true);
+        {     
+            User testUser = new User();
             homePage
                 .GoToHeader()
                 .GoToLogin()
