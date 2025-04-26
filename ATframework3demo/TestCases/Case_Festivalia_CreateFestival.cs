@@ -4,6 +4,7 @@ using ATframework3demo.BaseFramework;
 using ATframework3demo.PageObjects;
 using ATframework3demo.PageObjects.Constructor;
 using ATframework3demo.TestEntities.Festivalia;
+using System.Xml.Linq;
 // @"C:\\Users\\Admin\\Downloads\\График_сменности.docx"
 namespace ATframework3demo.TestCases
 {
@@ -27,26 +28,26 @@ namespace ATframework3demo.TestCases
             public static void CreateFestival(SearchPage homePage)
             {
                 var testUser = new User(true);
+                var tag = new Tag("Музыка");
+                var festival = new Festival(tag);
+                var venue = new Venue();
+                var EEvent = new Event(festival);
+
+
                 User.CreateUser(testUser);
-                homePage.GoToHeader().GoToLogin().Login(testUser);
+                homePage
+                    .GoToHeader()
+                    .GoToLogin()
+                    .Login(testUser)
+                    .GoToSearch()
+                    .GoToHeader()
+                    .GoToLK()
+                    .GoToMyFestivalsTab()
+                    .GoToConstructor()
+                    .PassData(festival)
+                    .SelectTag(festival.Tag)
+                    .SaveData();
 
-                var name = "Название" + HelperMethods.GetDateTimeSaltString(true, 4);
-                var shortdesc = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
-                var description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
-                var dateStart = HelperMethods.GetDate();
-                var dateEnd = HelperMethods.GetDate();
-                var timeStart = HelperMethods.GetTimeOfFestival(7);
-                var timeEnd = HelperMethods.GetTimeOfFestival(10);
-
-                var festival = new Festival(name, shortdesc, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description, dateStart, dateEnd, "Музыка", "\"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp\"");
-                var venue = new Venue(name, shortdesc, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description);
-                var EEvent = new Event(name, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description, dateStart, dateEnd, timeStart, timeEnd);
-                var header = new HeaderPage();
-                header.GoToLK().GoToMyFestivalsTab().
-                    GoToConstructor().
-                    PassData(festival)
-                   .SelectTag(festival.Tag)
-                   .SaveData();
                 var upperTab = new ConstructorUpperTab();
                 upperTab.
                     goToVenuePage().

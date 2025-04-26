@@ -1,4 +1,5 @@
 using atFrameWork2.TestEntities;
+using ATframework3demo.BaseFramework;
 using ATframework3demo.BaseFramework.BitrixCPinterraction;
 
 namespace ATframework3demo.TestEntities.Festivalia
@@ -13,52 +14,42 @@ namespace ATframework3demo.TestEntities.Festivalia
         public string DateStart { get; set; }
         public string DateEnd { get; set; }
         public string Tag { get; set; }
-        public Festival(string name, string shortDescription, string photoPath, string description,string dateStart,string dateEnd, string tag, string? mapPath=null)
+        public PortalInfo PortalInfo { get; }
+        public Festival(Tag tag,int dateStartFromToday = 0, int dateEndFromToday = 0, string? mapPath=null)
         {
-            PhotoPath = photoPath;
-            Name = name;
-            ShortDescription = shortDescription;
-            Description = description;
-            DateStart = dateStart;
-            DateEnd = dateEnd;
-            MapPath = mapPath;
-            Tag = tag;
+            PhotoPath = @"C:\Users\Dima\source\repos\ZmachinskiiD\FinalProject\ATframework3demo\TestData\eventCover.jpg";
+            Name = "Название" + HelperMethods.GetDateTimeSaltString(true, 4);
+            ShortDescription = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
+            Description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
+            DateStart = HelperMethods.GetDate(dateStartFromToday);
+            DateEnd = HelperMethods.GetDate(dateEndFromToday);
+            MapPath = @"C:\Users\Dima\source\repos\ZmachinskiiD\FinalProject\ATframework3demo\TestData\Карта.jpeg";
+            Tag = tag.Name;
 
         }
 
-        public static string InsertTag(string name, Uri portalUri, User adminUser)
+        public string insertFestival(User user)
         {
-            PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_tag (TITLE) VALUES('{name}')", portalUri, adminUser);
-            var result = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM up_festivaliya_tag WHERE TITLE='{name}'", portalUri, adminUser);
-            return result.Count == 0 ? null : result[0].ID;
-        }
-        public static string insertFestival(Festival festival, Uri portalUri, User adminUser, string AuthorLogin)
-        {
-            var author= PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM b_user WHERE LOGIN='{AuthorLogin}'", portalUri, adminUser);
-            var authorId= author.Count == 0 ? null : author[0].ID;
+            var authorId = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM b_user WHERE LOGIN='{user.LoginAkaEmail}'", PortalInfo.PortalUri, PortalInfo.PortalAdmin)[0].ID;
             PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_festival(TITLE,DESCRIPTION,SHORT_DESC,START_AT,END_AT,ORGANIZER_ID,IS_PUBLISHED)" +
-                $"VALUES('{festival.Name}','{festival.Description}','{festival.ShortDescription}','{festival.DateStart}','{festival.DateEnd}',{authorId},1);", portalUri, adminUser);
-            var result = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM up_festivaliya_festival WHERE TITLE='{festival.Name}'", portalUri, adminUser);
+                $"VALUES('{Name}','{Description}','{ShortDescription}','{DateStart}','{DateEnd}',{authorId},1);", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
+            var result = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM up_festivaliya_festival WHERE TITLE='{Name}'", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             return result.Count == 0 ? null : result[0].ID;
         }
-        public static void addTags(string festivalId, string tagId, Uri portalUri, User adminUser)
+        public void addTags(Tag tag)
         {
+            string festivalId = GetFestivalID();
+            string tagId = tag.GetTagID();
             PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_festival_tag (FESTIVAL_ID, TAG_ID)" +
-                $"VALUES({festivalId},{tagId})", portalUri, adminUser);
+                $"VALUES({festivalId},{tagId})", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
         }
-        public static string addVenue(string festivalId, Venue venue, Uri portalUri, User adminUser)
+        public string addVenue(Venue venue)
         {
+            string festivalId = GetFestivalID();
             PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_venue(FESTIVAL_ID,TITLE, DESCRIPTION,SHORT_DESC)" +
-                $"VALUES({festivalId},'{venue.Name}','{venue.Description}','{venue.ShortDescription}');", portalUri, adminUser);
-            var result = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM up_festivaliya_venue WHERE TITLE='{venue.Name}'", portalUri, adminUser);
-            return result.Count == 0 ? null : result[0].ID;
+                $"VALUES({festivalId},'{venue.Name}','{venue.Description}','{venue.ShortDescription}');", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
 
-        }
-        public static string addEvent(string venueId, Event Event, Uri portalUri, User adminUser)
-        {
-            PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_event(VENUE_ID, TITLE, DESCRIPTION,START_AT,END_AT)" +
-                $"VALUES({venueId},'{Event.Name}','{Event.Description}','{Event.DateStart + ' ' + Event.TimeStart}', '{Event.DateEnd + ' ' + Event.TimeEnd}');", portalUri, adminUser);
-            var result = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM up_festivaliya_event WHERE TITLE='{Event.Name}'", portalUri, adminUser);
+            var result = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM up_festivaliya_venue WHERE TITLE='{venue.Name}'", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             return result.Count == 0 ? null : result[0].ID;
         }
         public static void addPhotos(string festivalId, string venueId, string eventId, int fileId, Uri portalUri, User adminUser)
@@ -68,7 +59,11 @@ namespace ATframework3demo.TestEntities.Festivalia
                 $"('festival_cover','{festivalId}','{fileId}',1)," +
                 $"('venue','{venueId}','{fileId}',1)," +
                 $"('event','{eventId}','{fileId}',1)", portalUri, adminUser);
-
+        }
+        public string GetFestivalID()
+        {
+            var result = PortalDatabaseExecutor.ExecuteQuery($"select ID from up_festivaliya_festival where title = '{Name}'", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
+            return result.Count == 0 ? null : result[0].ID;
         }
     }
 }
