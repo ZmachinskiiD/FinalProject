@@ -55,22 +55,21 @@ namespace atFrameWork2.PageObjects
         WebItem infoParticipateMessage =>
             new WebItem("//div[@class='info-message' and contains(text(),'избранное')]",
                 "Сообщение об авторизации, для участия в фестивале");
+        
 
 
-        public SearchPage Login(User admin)
+        public LoginPage Login(User user)
         {       
-            loginField.SendKeys(admin.LoginAkaEmail, Driver);
+            loginField.SendKeys(user.LoginAkaEmail, Driver);
             if (!pwdField.WaitElementDisplayed(1, Driver))
                 loginField.SendKeys(Keys.Enter, Driver);
-            pwdField.SendKeys(admin.Password, Driver, logInputtedText: false);
+            pwdField.SendKeys(user.Password, Driver, logInputtedText: false);
             enterBtn.Click();
-            return new SearchPage(Driver);
+            return new LoginPage(Driver);
         }
-        public SearchPage NoLogin()
+        public SearchPage GoToSearch()
         {
-            var header = new HeaderPage();
-            header.GoToSearch();
-            return new SearchPage(Driver);
+            return new SearchPage();
         }
         public HeaderPage GoToHeader()
         {
@@ -80,6 +79,10 @@ namespace atFrameWork2.PageObjects
         {
             regBtn.Click();
             return new RegisterPage();
+        }
+        public bool ErrorEmailorPwdDisplayed()
+        {
+            return errorMessage.WaitElementDisplayed(5);
         }
     }
 }

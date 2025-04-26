@@ -1,6 +1,7 @@
 ﻿using AquaTestFramework.CommonFramework.BitrixCPinteraction;
 using atFrameWork2.BaseFramework;
 using atFrameWork2.TestEntities;
+using ATframework3demo.BaseFramework;
 using ATframework3demo.BaseFramework.BitrixCPinterraction;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,12 @@ namespace atFrameWork2.TestEntities
 {
     public class User
     {
-        public User() { }
-
-        public User( bool organizer = false, string password = "123456", string name = "Иван", string lastName = "Иванов")
+        public User(bool organizer = false, string password = "123456", string name = "Иван", string lastName = "Иванов")
         {
-            LoginAkaEmail = ATframework3demo.BaseFramework.HelperMethods.GetDateTimeSaltString(false,10)+ "@gmail.com";
+            LoginAkaEmail = HelperMethods.GetDateTimeSaltString(false,10) + "@gmail.com";
             Password = password;
-            Name = name+ ATframework3demo.BaseFramework.HelperMethods.GetDateTimeSaltString(false, 8);
-            LastName = lastName+ ATframework3demo.BaseFramework.HelperMethods.GetDateTimeSaltString(false, 8);
+            Name = name + HelperMethods.GetDateTimeSaltString(false, 8);
+            LastName = lastName + HelperMethods.GetDateTimeSaltString(false, 8);
             Organizer = organizer;
         }
 
@@ -32,6 +31,12 @@ namespace atFrameWork2.TestEntities
         {
             var result = PortalDatabaseExecutor.ExecuteQuery("select ID from b_user where EMAIL = '" + LoginAkaEmail + "'", portalUri, adminUser);
             return result.Count == 0 ? null : result[0].ID;
+        }
+        public static string GetRegisteredEmail(Uri portalUri, User adminUser)
+        {
+            var result = PortalDatabaseExecutor.ExecuteQuery("select login from b_user where login like '%@%' limit 1", portalUri, adminUser);
+            
+            return result[0].login;
         }
         public static void CreateUser(User user)
         {

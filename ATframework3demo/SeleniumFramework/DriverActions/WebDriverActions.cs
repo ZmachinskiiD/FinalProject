@@ -34,7 +34,7 @@ namespace atFrameWork2.SeleniumFramework
             WebItem.DefaultDriver.Quit();
             WebItem.DefaultDriver = default;
             return new LoginPage(portal)
-                .Login(user);
+                .Login(user).GoToSearch();
         }
 
         /// <summary>

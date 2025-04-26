@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using ATframework3demo.PageObjects;
 using atFrameWork2.PageObjects;
+using OpenQA.Selenium.Support.UI;
 
 
 namespace ATframework3demo.PageObjects
@@ -55,6 +56,8 @@ namespace ATframework3demo.PageObjects
             new WebItem("//div[@id='error-message' and contains(text(),'Пароль')]",
                 "Окно ошибки длины пароля");
 
+        
+
         public RegisterPage CompleteForm(User user)
         {
             emailField.SendKeys(user.LoginAkaEmail);
@@ -73,13 +76,34 @@ namespace ATframework3demo.PageObjects
             regBtn.Click();
             return new LoginPage();
         }
+        public bool EmailIsExist()
+        {
+            return errorEmailMsg.WaitElementDisplayed(3);
+
+        }
+        public void ConfirmAlert()
+        {
+            Thread.Sleep(3000);
+            WebDriverActions.BrowserAlert(true);
+            
+            
+            
+        }
         public HeaderPage GoToHeader()
         {
             return new HeaderPage();
         }
-        public LoginPage CreateAccount()
+        public RegisterPage CreateAccount(User user)
         {
             regBtn.Click();
+            if (user.Organizer)
+            {
+                this.ConfirmAlert();
+            }
+            return new RegisterPage();
+        }
+        public LoginPage GoToLogin()
+        {
             return new LoginPage();
         }
     }
