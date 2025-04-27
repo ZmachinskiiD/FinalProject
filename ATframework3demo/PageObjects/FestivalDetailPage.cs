@@ -20,7 +20,7 @@ namespace ATframework3demo.PageObjects
         WebItem festivalTitle =>
             new WebItem("//*[@class='festival-title']",
                 "Название фестиваля");
-        WebItem fistivalDescription =>
+        WebItem festivalDescription =>
             new WebItem("//*[@class='festival-description']",
                 "Описание фестиваля");
         WebItem mapCanvas =>
@@ -32,6 +32,25 @@ namespace ATframework3demo.PageObjects
             string path = $"//h3[text()='{name}']/ancestor::article[@class='venue-card']";
             return new VenuePosterPage(path);
         }
+        public bool assertTitle(string Title)
+        {
+            var result = festivalTitle.AssertTextContains(Title, $"Ожидалось {Title}");
+            if(! result)
+            {
+                throw new Exception("Неверное название");
+            }
+            return result;
+        }
+        public bool assertDescription(string Description)
+        {
+            var result = festivalDescription.AssertTextContains(Description, $"Ожидалось {Description}");
+            if (!result)
+            {
+                throw new Exception("Неверное описание");
+            }
+            return result;
+        }
+      
 
 
     }

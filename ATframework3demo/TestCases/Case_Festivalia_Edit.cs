@@ -1,4 +1,5 @@
 ﻿using atFrameWork2.BaseFramework;
+using atFrameWork2.SeleniumFramework;
 using atFrameWork2.TestEntities;
 using ATframework3demo.PageObjects;
 using ATframework3demo.TestEntities.Festivalia;
@@ -24,7 +25,6 @@ namespace ATframework3demo.TestCases
                 var festival = new Festival(tag, 11, 40, null, homePage.PortalInfo);
                 var venue = new Venue(null, null, null, null, homePage.PortalInfo);
                 var EEvent = new Event(13, 13);
-
                 var festId = festival.insertFestival(testUser);
                 festival.addTagByName(tag.Name);
                 var venueId = festival.addVenue(venue);
@@ -32,8 +32,15 @@ namespace ATframework3demo.TestCases
                 Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
 
                 var festivalNewInfo = new Festival(tag, 11, 40, null, homePage.PortalInfo);
+                var festivalPage=homePage.GoToHeader().FilterByName(festival.Name).goToFestivalPage(festId);
+
+                //var driver2 = WebDriverActions.GetNewDriver();
+                //var homePage2 = new SearchPage(TestCase.RunningTestCase.TestPortal, driver2).GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name)
+                //    .OpenMenu().OpenFestivalForEdit().ClearData().PassData(festivalNewInfo).SaveData();
+                //WebDriverActions
                 homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name)
-                    .OpenMenu().OpenFestivalForEdit().PassData(festivalNewInfo).SaveData();
+                    .OpenMenu().OpenFestivalForEdit().ClearData().PassData(festivalNewInfo).SaveData();
+                homePage.GoToHeader().FilterByName(festivalNewInfo.Name).goToFestivalPage(festId).assertDescription(festivalNewInfo.Description);
 
             }
         }

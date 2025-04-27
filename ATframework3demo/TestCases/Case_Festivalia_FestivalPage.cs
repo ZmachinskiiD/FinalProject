@@ -14,6 +14,7 @@ namespace ATframework3demo.TestCases
                 return new List<TestCase>
                         {
                             new TestCase("Переход на страницу фестиваля", homePage => GoToFestival(homePage)),
+                             new TestCase("Переход на страницу площадки", homePage => GoToVenuePage(homePage)),
                         };
             }
             public static void GoToFestival(SearchPage homePage)
@@ -30,8 +31,29 @@ namespace ATframework3demo.TestCases
                 var venueId=festival.addVenue(venue);
                 var eventId=venue.AddEvent(EEvent);
                 Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
-                homePage.GoToHeader().FilterByName(festival.Name).findTheFestival(festId);
+                homePage.GoToHeader().FilterByName(festival.Name).goToFestivalPage(festId).assertTitle(festival.Name);
+                var festivalPage = new FestivalDetailPage();
+                festivalPage.assertDescription(festival.Description);
 
+            }
+            public static void GoToVenuePage(SearchPage homePage)
+            {
+                var testUser = new User(true);
+                User.CreateUser(testUser);
+                var tag = new Tag("Активный отдых", homePage.PortalInfo);
+                var festival = new Festival(tag, 11, 40, null, homePage.PortalInfo);
+                var venue = new Venue(null, null, null, null, homePage.PortalInfo);
+                var EEvent = new Event(13, 13);
+
+                var festId = festival.insertFestival(testUser);
+                festival.addTagByName(tag.Name);
+                var venueId = festival.addVenue(venue);
+                var eventId = venue.AddEvent(EEvent);
+
+                Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+                homePage.GoToHeader().FilterByName(festival.Name).goToFestivalPage(festId).GetVenueByName(venue.Name).GoToVenueDetail().assertTitle(venue.Name);
+                var venuePage = new VenueDetailPage();
+                venuePage.assertDescription(venue.Description);
             }
         }
     }

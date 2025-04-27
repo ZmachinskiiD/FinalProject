@@ -16,7 +16,7 @@ namespace ATframework3demo.PageObjects.LK
         }
         WebItem moreButton => new WebItem(Path + "//a[@class='details-btn']", "Кнопка подробнее у карточки");
         //WebItem changeStatusButton => new WebItem(Path + "//i[contains(@class,'fa-toggle')]", "Кнопка переключения статуса");
-        WebItem menuButton => new WebItem(Path + "//button[class=\"dropdown-toggle\"]", "Кнопка открывающая меню на карточке");
+        WebItem menuButton => new WebItem(Path + "//button[@class=\"dropdown-toggle\"]", "Кнопка открывающая меню на карточке");
         public MyFestivalTab ReturnToTab()
         {
             return new MyFestivalTab(Driver);

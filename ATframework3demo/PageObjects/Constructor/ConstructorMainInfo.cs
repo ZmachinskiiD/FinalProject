@@ -36,6 +36,19 @@ namespace ATframework3demo.PageObjects.Constructor
             StartInput.SendKeys(festival.DateStart);
             return new ConstructorMainInfo(Driver);
         }
+        public ConstructorMainInfo ClearData()
+
+        {
+            NameInput.SendKeys(Keys.Control + "a");
+            NameInput.SendKeys(Keys.Delete);
+            DescInput.SendKeys(Keys.Control + "a");
+            DescInput.SendKeys(Keys.Delete);
+            DescFullInput.SendKeys(Keys.Control + "a");
+            DescFullInput.SendKeys(Keys.Delete);
+            EndInput.SendKeys(Keys.Backspace);
+            StartInput.SendKeys(Keys.Backspace);
+            return new ConstructorMainInfo(Driver);
+        }
         public ConstructorMainInfo SelectTag(string name)
         {
             TagInput.SendKeys(name);
