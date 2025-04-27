@@ -18,13 +18,13 @@ namespace ATframework3demo.TestEntities.Festivalia
         public PortalInfo PortalInfo { get; }
         public Festival(Tag tag, int dateStartFromToday = 0, int dateEndFromToday = 0, string? mapPath = null, PortalInfo? portalInfo = null)
         {
-            PhotoPath = AppDomain.CurrentDomain.BaseDirectory + @"\TestData\festivalCover.webp"; 
+            PhotoPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..")) + @"\TestData\festivalCover.webp"; 
             Name = "Название" + HelperMethods.GetDateTimeSaltString(true, 10);
             ShortDescription = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 10);
             Description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
             DateStart = HelperMethods.GetDate(dateStartFromToday);
             DateEnd = HelperMethods.GetDate(dateEndFromToday);
-            MapPath = AppDomain.CurrentDomain.BaseDirectory + @"\TestData\Карта.jpeg";
+            MapPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..")) + @"\TestData\Карта.jpeg";
             Tag = tag.Name;
             PortalInfo = portalInfo;
 
