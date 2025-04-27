@@ -14,18 +14,16 @@ namespace ATframework3demo.TestEntities.Festivalia
         public string MapPath { get; set; }
         public string DateStart { get; set; }
         public string DateEnd { get; set; }
-        public string Tag { get; set; }
         public PortalInfo PortalInfo { get; }
-        public Festival(Tag tag, int dateStartFromToday = 0, int dateEndFromToday = 0, string? mapPath = null, PortalInfo? portalInfo = null)
+        public Festival(int dateStartFromToday = 0, int dateEndFromToday = 0, string? mapPath = null, PortalInfo? portalInfo = null)
         {
-            PhotoPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..")) + @"\TestData\festivalCover.webp"; 
+            PhotoPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..")) + @"\TestData\festivalCover.jpg"; 
             Name = "Название" + HelperMethods.GetDateTimeSaltString(true, 10);
             ShortDescription = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 10);
             Description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
             DateStart = HelperMethods.GetDate(dateStartFromToday);
             DateEnd = HelperMethods.GetDate(dateEndFromToday);
             MapPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..")) + @"\TestData\Карта.jpeg";
-            Tag = tag.Name;
             PortalInfo = portalInfo;
 
         }
@@ -61,6 +59,14 @@ namespace ATframework3demo.TestEntities.Festivalia
                 $"('festival_cover','{festivalId}','{fileId}',1)," +
                 $"('venue','{venueId}','{fileId}',1)," +
                 $"('event','{eventId}','{fileId}',1)", portalUri, adminUser);
+        }
+        public void AddPhotoFestival()
+        {
+            var fileId = PortalDatabaseExecutor.ExecuteQuery($"Select max(file_id) as ID from up_festivaliya_images", PortalInfo.PortalUri, PortalInfo.PortalAdmin)[0].ID;
+
+            PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_images(ENTITY_TYPE, ENTITY_ID, FILE_ID,IS_MAIN)" +
+                $"VALUES " +
+                $"('festival_cover','{GetFestivalID()}','{fileId}',1)", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
         }
         public string GetFestivalID()
         {

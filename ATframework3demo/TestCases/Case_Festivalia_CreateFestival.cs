@@ -30,7 +30,7 @@ namespace ATframework3demo.TestCases
                 var testUser = new User(true);
                 User.CreateUser(testUser);
                 var tag = new Tag("Музыка");
-                var festival = new Festival(tag,1,4);
+                var festival = new Festival(1,4);
                 var venue = new Venue();
                 var EEvent = new Event(2,3);
                 homePage
@@ -43,7 +43,7 @@ namespace ATframework3demo.TestCases
                     .GoToMyFestivalsTab()
                     .GoToConstructor()
                     .PassData(festival)
-                    .SelectTag(festival.Tag)
+                    .SelectTag(tag.Name)
                     .SaveData();
 
                 var upperTab = new ConstructorUpperTab();
@@ -64,14 +64,14 @@ namespace ATframework3demo.TestCases
                 var testUser = new User(true);
                 User.CreateUser(testUser);
                 var tag = new Tag("Музыка");
-                var festival = new Festival(tag);
+                var festival = new Festival();
                 var venue = new Venue();
                 var EEvent = new Event();
                 User.CreateUser(testUser);
                 homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().
                     GoToConstructor().
                     PassData(festival)
-                   .SelectTag(festival.Tag)
+                   .SelectTag(tag.Name)
                    .SaveData();
                 var header = new HeaderPage();
                 Console.WriteLine(festival.Name);
@@ -84,7 +84,7 @@ namespace ATframework3demo.TestCases
                 var testUser = new User(true);
                 User.CreateUser(testUser);
                 var tag = new Tag("Музыка");
-                var festival = new Festival(tag,5,2);
+                var festival = new Festival(5,2);
                 var venue = new Venue();
                 var EEvent = new Event();
                 homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().
@@ -98,7 +98,7 @@ namespace ATframework3demo.TestCases
                 var testUser = new User(true);
                 User.CreateUser(testUser);
                 var tag = new Tag("Музыка");
-                var festival = new Festival(tag,-10,2);
+                var festival = new Festival(-10,2);
                 var venue = new Venue();
                 var EEvent = new Event();
                 homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().

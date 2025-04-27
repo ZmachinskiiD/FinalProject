@@ -21,11 +21,17 @@ namespace ATframework3demo.PageObjects
         WebItem detailBtn =>
             new WebItem("//a[contains(@class,'details-btn')]",
                 $"Кнопка подробнее о фестивале по названию");
+        WebItem nameFestival(string name) =>
+            new WebItem(Path + $"//h3[text()='{name}']",
+                "Название фестиваля в афише фестиваля");
         public SearchPage GoToSearch()
         {
             return new SearchPage();
         }
-        
+        public bool assertNameCard(string name)
+        {
+            return nameFestival(name).WaitElementDisplayed(3);
+        }
 
     }
 }

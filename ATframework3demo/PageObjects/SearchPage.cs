@@ -62,6 +62,11 @@ namespace ATframework3demo.PageObjects
             string path = $"//img[@alt='{name}']/ancestor::article[@class='festival-card'][1]";
             return new FestivalPosterPage(path);
         }
+        public SearchPage ChooseTag(string name)
+        {
+            tagBtn(name).Click();
+            return new SearchPage();
+        }
 
     }
 }

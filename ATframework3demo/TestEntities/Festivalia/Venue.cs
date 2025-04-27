@@ -43,5 +43,13 @@ namespace ATframework3demo.TestEntities.Festivalia
             }
             return null;
         }
+        public void AddPhotoVenue()
+        {
+            var fileId = PortalDatabaseExecutor.ExecuteQuery($"Select max(file_id) as ID from up_festivaliya_images", PortalInfo.PortalUri, PortalInfo.PortalAdmin)[0].ID;
+
+            PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_images(ENTITY_TYPE, ENTITY_ID, FILE_ID,IS_MAIN)" +
+                $"VALUES " +
+                $"('venue','{GetVenueID()}','{fileId}',1)", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
+        }
     }
 }
