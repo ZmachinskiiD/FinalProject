@@ -20,7 +20,7 @@ namespace ATframework3demo.TestCases
                 new TestCase("Создание черновика фестиваля", homePage => CreateFestivalDraft(homePage)),
                 new TestCase("Создание фестиваля c датой начала больше даты конца", homePage => CreateDateStartBiggerthanDateEnd(homePage)),
                 new TestCase("Создание фестиваля c датой начала меньше сегодня", homePage => CreateFestivalBeforeToday(homePage)),
-                new TestCase("ФФФФФ", homePage => Placeholder(homePage)),
+                //new TestCase("ФФФФФ", homePage => Placeholder(homePage)),
 
             };
             }
@@ -28,13 +28,11 @@ namespace ATframework3demo.TestCases
             public static void CreateFestival(SearchPage homePage)
             {
                 var testUser = new User(true);
-                var tag = new Tag("Музыка");
-                var festival = new Festival(tag);
-                var venue = new Venue();
-                var EEvent = new Event(festival);
-
-
                 User.CreateUser(testUser);
+                var tag = new Tag("Музыка");
+                var festival = new Festival(tag,1,4);
+                var venue = new Venue();
+                var EEvent = new Event(2,3);
                 homePage
                     .GoToHeader()
                     .GoToLogin()
@@ -65,16 +63,12 @@ namespace ATframework3demo.TestCases
             {
                 var testUser = new User(true);
                 User.CreateUser(testUser);
-                homePage.GoToHeader().GoToLogin().Login(testUser);
-
-                var name = "Название" + HelperMethods.GetDateTimeSaltString(true, 4);
-                var shortdesc = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
-                var description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
-                var dateStart = HelperMethods.GetDate();
-                var dateEnd = HelperMethods.GetDate();
-                var photoPath = @"C:\\Users\\Admin\\source\\repos\\FinalProject\\ATlearning\\ATframework3demo\\TestData\\festivalCover.webp";
-                var festival = new Festival(name, shortdesc, photoPath, description, dateStart, dateEnd, "Музыка",null);
-                homePage.GoToHeader().GoToLK().GoToMyFestivalsTab().
+                var tag = new Tag("Музыка");
+                var festival = new Festival(tag);
+                var venue = new Venue();
+                var EEvent = new Event();
+                User.CreateUser(testUser);
+                homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().
                     GoToConstructor().
                     PassData(festival)
                    .SelectTag(festival.Tag)
@@ -89,16 +83,11 @@ namespace ATframework3demo.TestCases
             {
                 var testUser = new User(true);
                 User.CreateUser(testUser);
-                homePage.GoToHeader().GoToLogin().Login(testUser);
-
-                var name = "Название" + HelperMethods.GetDateTimeSaltString(true, 4);
-                var shortdesc = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
-                var description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
-                var dateStart = HelperMethods.GetDate(2);
-                var dateEnd = HelperMethods.GetDate(1);
-                var photoPath = @"C:\\Users\\Admin\\source\\repos\\FinalProject\\ATlearning\\ATframework3demo\\TestData\\festivalCover.webp";
-                var festival = new Festival(name, shortdesc, photoPath, description, dateStart, dateEnd, "Музыка", null);
-                homePage.GoToHeader().GoToLK().GoToMyFestivalsTab().
+                var tag = new Tag("Музыка");
+                var festival = new Festival(tag,5,2);
+                var venue = new Venue();
+                var EEvent = new Event();
+                homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().
                     GoToConstructor().
                     PassData(festival).AssertIncorrectStartEndDate();
 
@@ -108,42 +97,37 @@ namespace ATframework3demo.TestCases
             {
                 var testUser = new User(true);
                 User.CreateUser(testUser);
-                homePage.GoToHeader().GoToLogin().Login(testUser);
-
-                var name = "Название" + HelperMethods.GetDateTimeSaltString(true, 4);
-                var shortdesc = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
-                var description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
-                var dateStart = HelperMethods.GetDate(-10);
-                var dateEnd = HelperMethods.GetDate(1);
-                var photoPath = @"C:\\Users\\Admin\\source\\repos\\FinalProject\\ATlearning\\ATframework3demo\\TestData\\festivalCover.webp";
-                var festival = new Festival(name, shortdesc, photoPath, description, dateStart, dateEnd, "Музыка", null);
-                homePage.GoToHeader().GoToLK().GoToMyFestivalsTab().
+                var tag = new Tag("Музыка");
+                var festival = new Festival(tag,-10,2);
+                var venue = new Venue();
+                var EEvent = new Event();
+                homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().
                     GoToConstructor().
                     PassData(festival).SaveData().AssertStartDateIsIncorrect();
             }
-            public static void Placeholder(SearchPage homePage)
-            {
-                var testUser = new User(true);
-                User.CreateUser(testUser);
-                var name = "Название" + HelperMethods.GetDateTimeSaltString(true, 4);
-                var shortdesc = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
-                var description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
-                var dateStart = HelperMethods.GetDate(1,true);
-                var dateEnd = HelperMethods.GetDate(1,true);
-                var timeStart = HelperMethods.GetTimeOfFestival(7);
-                var timeEnd = HelperMethods.GetTimeOfFestival(10);
+            //public static void Placeholder(SearchPage homePage)
+            //{
+            //    var testUser = new User(true);
+            //    User.CreateUser(testUser);
+            //    var name = "Название" + HelperMethods.GetDateTimeSaltString(true, 4);
+            //    var shortdesc = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
+            //    var description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
+            //    var dateStart = HelperMethods.GetDate(1,true);
+            //    var dateEnd = HelperMethods.GetDate(1,true);
+            //    var timeStart = HelperMethods.GetTimeOfFestival(7);
+            //    var timeEnd = HelperMethods.GetTimeOfFestival(10);
 
-                var festival = new Festival(name, shortdesc, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description, dateStart, dateEnd, "Музыка", "\"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp\"");
-                var venue = new Venue(name, shortdesc, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description);
-                var EEvent = new Event(name, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description, dateStart, dateEnd, timeStart, timeEnd);
+            //    var festival = new Festival(name, shortdesc, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description, dateStart, dateEnd, "Музыка", "\"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp\"");
+            //    var venue = new Venue(name, shortdesc, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description);
+            //    var EEvent = new Event(name, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description, dateStart, dateEnd, timeStart, timeEnd);
 
-                var tagId = Festival.InsertTag($"{HelperMethods.GetDateTimeSaltString(true, 4)}", homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
-                var festivalId = Festival.insertFestival(festival, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin,testUser.LoginAkaEmail);
-               Festival.addTags(festivalId, tagId, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
-                var venueID= Festival.addVenue(festivalId,venue, homePage.PortalInfo.PortalUri,homePage.PortalInfo.PortalAdmin);
-                var eventID = Festival.addEvent(venueID, EEvent, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
-                Festival.addPhotos(festivalId, venueID, eventID, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
-            }
+            //    var tagId = Festival.InsertTag($"{HelperMethods.GetDateTimeSaltString(true, 4)}", homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+            //    var festivalId = Festival.insertFestival(festival, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin,testUser.LoginAkaEmail);
+            //   Festival.addTags(festivalId, tagId, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+            //    var venueID= Festival.addVenue(festivalId,venue, homePage.PortalInfo.PortalUri,homePage.PortalInfo.PortalAdmin);
+            //    var eventID = Festival.addEvent(venueID, EEvent, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+            //    Festival.addPhotos(festivalId, venueID, eventID, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+            //}
         }
     }
 }

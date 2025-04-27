@@ -35,9 +35,10 @@ namespace ATframework3demo.PageObjects.LK
             }
 
         }
-        public void OpenMenu()
+        public MyFestivalmenu OpenMenu()
         {
             menuButton.Click();
+            return new MyFestivalmenu(Driver);
         }
 
     }

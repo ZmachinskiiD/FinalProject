@@ -1,6 +1,7 @@
 using atFrameWork2.TestEntities;
 using ATframework3demo.BaseFramework;
 using ATframework3demo.BaseFramework.BitrixCPinterraction;
+using System.Globalization;
 
 namespace ATframework3demo.TestEntities.Festivalia
 {
@@ -11,12 +12,13 @@ namespace ATframework3demo.TestEntities.Festivalia
         public string ShortDescription { get; set; }
         public string Description { get; set; }
         public PortalInfo PortalInfo { get; set; }
-        public Venue(string name = "Площадка", string shortDescription = "Краткое описание", string photoPath = "Путь к фото", string description = "Описание площадки")
+        public Venue(string name = "Площадка", string shortDescription = "Краткое описание", string photoPath = "Путь к фото", string description = "Описание площадки", PortalInfo? portalInfo = null)
         {
-            PhotoPath = @"C:\Users\Dima\source\repos\ZmachinskiiD\FinalProject\ATframework3demo\TestData\venueCover.jpg";
+            PhotoPath = AppDomain.CurrentDomain.BaseDirectory + @"\TestData\venueCover.jpg";
             Name = "Площадка" + HelperMethods.GetDateTimeSaltString(true, 4);
             ShortDescription = "Краткое " + HelperMethods.GetDateTimeSaltString(true, 4);
             Description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
+            PortalInfo = portalInfo;
 
         }
         public string GetVenueID()
@@ -28,9 +30,18 @@ namespace ATframework3demo.TestEntities.Festivalia
         {
             var venueID = GetVenueID();
             PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_event(VENUE_ID, TITLE, DESCRIPTION,START_AT,END_AT)" +
-                $"VALUES({venueID},'{Event.Name}','{Event.Description}','{Event.DateStart + ' ' + Event.TimeStart}', '{Event.DateEnd + ' ' + Event.TimeEnd}');", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
+                $"VALUES({venueID},'{Event.Name}','{Event.Description}','{ConvertDateFormatSafe(Event.DateStart) + ' ' + Event.TimeStart}', '{ConvertDateFormatSafe(Event.DateEnd) + ' ' + Event.TimeEnd}');", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             var result = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM up_festivaliya_event WHERE TITLE='{Event.Name}'", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             return result.Count == 0 ? null : result[0].ID;
+        }
+        public static string? ConvertDateFormatSafe(string inputDate)
+        {
+            if (DateTime.TryParseExact(inputDate, "dd.MM.yyyy",
+                CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+            {
+                return date.ToString("yyyy-MM-dd");
+            }
+            return null;
         }
     }
 }

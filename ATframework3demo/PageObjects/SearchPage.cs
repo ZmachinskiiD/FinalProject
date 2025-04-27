@@ -48,6 +48,14 @@ namespace ATframework3demo.PageObjects
             }
 
         }
+        public FestivalDetailPage goToFestivalPage(string festivalId)
+        {
+            WebItem festivalButton =
+             new WebItem($"//a[@href='/festivals/{festivalId}/']",
+                $"Кнопка подробнее о фестивале по ID");
+            festivalButton.Click();
+           return new FestivalDetailPage();
+        }
 
         public FestivalPosterPage GetFestivalPosterByName(string name)
         {

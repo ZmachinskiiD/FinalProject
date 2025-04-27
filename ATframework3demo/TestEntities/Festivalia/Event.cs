@@ -1,3 +1,4 @@
+using atFrameWork2.TestEntities;
 using ATframework3demo.BaseFramework;
 
 namespace ATframework3demo.TestEntities.Festivalia
@@ -11,13 +12,13 @@ namespace ATframework3demo.TestEntities.Festivalia
         public string DateEnd { get; set; }
         public string TimeStart { get; set; }
         public string TimeEnd { get; set; }
-        public Event(Festival festival, string name = "Событие",  string photoPath = "", string description = "", int dateStart = 0, int dateEnd = 0,int timeStartFromNow = 6,int timeEndFromNow = 7)
+        public Event(int dateStart = 0, int dateEnd = 0, int timeStartFromNow = 6, int timeEndFromNow = 7, string name = "Событие",  string photoPath = "", string description = "", PortalInfo? portalInfo = null)
         {
-            PhotoPath = @"C:\Users\Dima\source\repos\ZmachinskiiD\FinalProject\ATframework3demo\TestData\eventCover.jpg";
+            PhotoPath = AppDomain.CurrentDomain.BaseDirectory + @"\TestData\eventCover.webp";
             Name = "Событие" + HelperMethods.GetDateTimeSaltString(true, 4);
             Description = "Описание" + HelperMethods.GetDateTimeSaltString(true, 21);
-            DateStart = festival.DateStart;
-            DateEnd = festival.DateEnd;
+            DateStart = HelperMethods.GetDate(dateStart);
+            DateEnd = HelperMethods.GetDate(dateEnd);
             TimeStart = HelperMethods.GetTimeOfFestival(timeStartFromNow);
             TimeEnd = HelperMethods.GetTimeOfFestival(timeEndFromNow);
         }

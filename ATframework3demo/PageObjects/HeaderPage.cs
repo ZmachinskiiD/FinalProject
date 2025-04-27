@@ -45,5 +45,11 @@ namespace ATframework3demo.PageObjects
             cabinetPageBtn.Click();
             return new LKLeftMenu();
         }
+        public SearchPage FilterByName(string Name)
+        {
+            searchField.SendKeys(Name);
+            searchBtn.Click();
+            return new SearchPage(Driver);
+        }
     }
 }

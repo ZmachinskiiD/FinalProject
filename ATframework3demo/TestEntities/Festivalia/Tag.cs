@@ -8,9 +8,10 @@ namespace ATframework3demo.TestEntities.Festivalia
     {
         public string Name { get; set; }
         public PortalInfo PortalInfo { get; }
-        public Tag(string name = "") 
+        public Tag(string name = "", PortalInfo? portalInfo = null) 
         {
             Name = name=="" ? HelperMethods.GetDateTimeSaltString(true, 4) : name;
+            PortalInfo = portalInfo;
         }
         public string InsertTag()
         {
