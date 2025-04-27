@@ -31,7 +31,7 @@ namespace ATframework3demo.TestCases
                 var eventId = venue.AddEvent(EEvent);
                 Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
 
-                var festivalNewInfo = new Festival(tag, 11, 40, null, homePage.PortalInfo);
+                var festivalNewInfo = new Festival(11, 40, null, homePage.PortalInfo);
                 homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name)
                     .OpenMenu().OpenFestivalForEdit().ClearData().PassData(festivalNewInfo).SaveData();
                 homePage.GoToHeader().FilterByName(festivalNewInfo.Name).goToFestivalPage(festId).assertDescription(festivalNewInfo.Description);
