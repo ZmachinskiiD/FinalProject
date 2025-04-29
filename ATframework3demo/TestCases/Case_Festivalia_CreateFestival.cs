@@ -53,7 +53,7 @@ namespace ATframework3demo.TestCases
                     passData(venue).
                     saveChanges();
                 upperTab.goToEventPage().OpenEventFormForVenueByName(venue.Name).passData(EEvent).saveChanges();
-                upperTab.goTomapPage().publishFestival().Publish().
+                upperTab.goTomapPage().publishFestival().ConfirmPublication().
                     //FindTheFestival(festival.Name);
                     GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name).FindTheFestival();
 

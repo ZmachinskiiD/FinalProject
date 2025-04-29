@@ -30,5 +30,15 @@ namespace ATframework3demo.PageObjects.Constructor
             SaveBtn.Click();
             return new ConstructorVenuePage(Driver);
         }
+        public ConstructorVenueForm clearData()
+        {
+            NameInput.SendKeys(Keys.Control + "a");
+            NameInput.SendKeys(Keys.Backspace);
+            DescFullInput.SendKeys(Keys.Control + "a");
+            DescFullInput.SendKeys(Keys.Backspace);
+            DescInput.SendKeys(Keys.Control + "a");
+            DescInput.SendKeys(Keys.Backspace);
+            return new ConstructorVenueForm(Driver);
+        }
     }
 }

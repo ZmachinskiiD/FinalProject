@@ -15,5 +15,10 @@ namespace ATframework3demo.PageObjects.Constructor
         }
         WebItem deleteButton => new WebItem(Path + "//button[@class=\"btn delete-btn\"]", "Кнопка удаления");
         WebItem editButton => new WebItem(Path + "//button[@class=\"btn edit-btn\"]", "Кнопка редактирования");
+        public ConstructorVenueForm OpenForEdit()
+        {
+            editButton.Click();
+            return new ConstructorVenueForm();
+        }
     }
 }

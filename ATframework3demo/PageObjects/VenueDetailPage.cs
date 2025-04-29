@@ -40,6 +40,9 @@ namespace ATframework3demo.PageObjects
             }
             return result;
         }
-
+        public EventPosterPage FindEventByName(string name)
+        {
+            return new EventPosterPage($"//div[@class='item-content'][.//h3[contains(text(), '{name}')]]");
+        }
     }
 }

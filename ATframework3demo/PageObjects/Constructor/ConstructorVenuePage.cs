@@ -20,5 +20,10 @@ namespace ATframework3demo.PageObjects.Constructor
             saveCreateVenue.Click();
             return new ConstructorVenueForm(Driver);
         }
+        public ConstructorVenueCard OpenVenueCard(string name)
+        {
+            return new ConstructorVenueCard($"//article[.//h3[contains(text(), '{name}')]]");
+        }
+
     }
 }

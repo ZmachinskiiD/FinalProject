@@ -38,6 +38,16 @@ namespace ATframework3demo.PageObjects.Constructor
             StartInput.SendKeys(Event.TimeStart);
             return new ConstructorEventForm(Driver);
         }
+        public ConstructorEventForm editData(Event Event)
+        {
+            NameInput.SendKeys(Keys.Control + "a");
+            NameInput.SendKeys(Keys.Backspace);
+            DescInput.SendKeys(Keys.Control + "a"); 
+            DescInput.SendKeys(Keys.Backspace);
+            NameInput.SendKeys(Event.Name);
+            DescInput.SendKeys(Event.Description);
+            return new ConstructorEventForm(Driver);
+        }
 
 
     } 

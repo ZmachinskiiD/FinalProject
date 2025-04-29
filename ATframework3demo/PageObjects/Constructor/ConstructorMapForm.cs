@@ -19,10 +19,10 @@ namespace ATframework3demo.PageObjects.Constructor
             MapInput.SendKeys(festival.MapPath);
             return new ConstructorMapForm(Driver);
         }
-        public ConstructorConfirmPublication publishFestival()
+        public ConstructorConfirmationWindow publishFestival()
         {
             PublishButton.Click();
-            return new ConstructorConfirmPublication(Driver);
+            return new ConstructorConfirmationWindow(Driver);
         }
     }
     
