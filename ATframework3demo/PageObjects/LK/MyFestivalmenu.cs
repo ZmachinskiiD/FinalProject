@@ -7,22 +7,19 @@ namespace ATframework3demo.PageObjects.LK
     public class MyFestivalmenu
     {
         IWebDriver Driver { get; }
+        string Path { get; }
 
-        public MyFestivalmenu(IWebDriver driver = default)
+        public MyFestivalmenu(string path = "", IWebDriver driver = default)
         {
             Driver = driver;
+            Path = path;
         }
-        WebItem editButton => new WebItem("//a[@class=\"dropdown-item\"]", "Кнопка открывающая страницу редактирования");
-        WebItem changeStatusButton => new WebItem("//i[contains(@class,'fa-toggle')]", "Кнопка переключения статуса");
+        WebItem editButton => new WebItem(Path + "//a[@class=\"dropdown-item\"]", "Кнопка открывающая страницу редактирования");
+        WebItem changeStatusButton => new WebItem(Path + "//i[contains(@class,'fa-toggle')]", "Кнопка переключения статуса");
         public ConstructorMainInfo OpenFestivalForEdit()
         {
             editButton.Click(Driver);
             return new ConstructorMainInfo(Driver);
-        }
-        public ConstructorConfirmPublication pressTheChangeStatusButton()
-        {
-            changeStatusButton.Click(Driver);
-            return new ConstructorConfirmPublication(Driver);
         }
     }
 }

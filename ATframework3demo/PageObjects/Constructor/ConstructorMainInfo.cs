@@ -1,4 +1,5 @@
 ﻿using atFrameWork2.SeleniumFramework;
+using ATframework3demo.PageObjects.LK;
 using ATframework3demo.TestEntities.Festivalia;
 using OpenQA.Selenium;
 
@@ -19,6 +20,7 @@ namespace ATframework3demo.PageObjects.Constructor
         WebItem EndInput = new WebItem("//input[@id='festivalEndAt']", "Поле ввода даты конца");
         WebItem TagInput = new WebItem("//input[@class='select2-search__field']", "Оле выбора тэга");
         WebItem ErrorWarning = new WebItem("//div[@class='notification error show' ]", "Всплывающее уведомление об ошибке");
+        WebItem confirmBtn = new WebItem("//button[@id='confirmation-modal-confirm']", "Кнопка принять перенос в/из черновика");
         WebItem TagSearch(string name) => new WebItem($"//option[contains(text(), '{name}')]", $"Выбор тэга по имени '{name}'  ");
 
 
@@ -77,6 +79,11 @@ namespace ATframework3demo.PageObjects.Constructor
                 throw new Exception("отстутсвует уведомление об ошибке");
             }
             return result;
+        }
+        public LKLeftMenu ConfirmChangePublished()
+        {
+            confirmBtn.Click();
+            return new LKLeftMenu();
         }
 
     }

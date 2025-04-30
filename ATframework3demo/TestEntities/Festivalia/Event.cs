@@ -12,7 +12,7 @@ namespace ATframework3demo.TestEntities.Festivalia
         public string DateStart { get; set; }
         public string DateEnd { get; set; }
         public string TimeStart { get; set; }
-        public string TimeEnd { get; set; }
+        public string TimeEnd { get; set; } 
         public PortalInfo PortalInfo { get; set; }
         public Event(int dateStart = 0, int dateEnd = 0, int timeStartFromNow = 6, int timeEndFromNow = 7, string name = "Событие",  string photoPath = "", string description = "", PortalInfo? portalInfo = null)
         {

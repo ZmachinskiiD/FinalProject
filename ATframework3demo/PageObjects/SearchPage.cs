@@ -9,12 +9,12 @@ namespace ATframework3demo.PageObjects
     {
         public SearchPage(IWebDriver driver = default)
         {
-            activeCheck.WaitElementDisplayed();
+            toggleBtn.WaitElementDisplayed();
             Driver = driver;
         }
         public SearchPage(PortalInfo portal,IWebDriver driver = default)
         {
-            activeCheck.WaitElementDisplayed();
+            toggleBtn.WaitElementDisplayed();
             Driver = driver;
             PortalInfo = portal;
         }
@@ -22,20 +22,27 @@ namespace ATframework3demo.PageObjects
         public IWebDriver Driver { get; }
         public PortalInfo PortalInfo { get; }
 
-        WebItem activeCheck =>
-            new WebItem("//input[@id='activeFilter']",
-                "Кнопка показывать прошедшие фестивали");
+       
 
-        WebItem tagBtn(string name) =>
-            new WebItem($"//section[@class='tag-filters']//div[contains(@class,'tag') and contains(text(),'{name}')]",
-                $"Тег с названием {name}");  
+        
         WebItem emptyStateMessage =>
             new WebItem("//div[@class='no-festivals-message']",
                 "Сообщение об отсутствие фестивалей");
+        WebItem toggleBtn =>
+            new WebItem("//button[@class='filter-toggle']",
+                "Кнопка открытия формы фильтров");
+        WebItem nextElemPagination =>
+            new WebItem("//div[@class='pagination']//a[contains(@class,'page-link')][last()]",
+                "Кнопка следующей страницы пагинации");
 
         public HeaderPage GoToHeader()
         {
             return new HeaderPage();
+        }
+        public SearchFilterPage OpenFilterForm()
+        {
+            toggleBtn.Click();
+            return new SearchFilterPage();
         }
         public void findTheFestival(string name)
         {
@@ -74,11 +81,6 @@ namespace ATframework3demo.PageObjects
         {
             string path = $"//img[@alt='{name}']/ancestor::article[@class='festival-card'][1]";
             return new FestivalPosterPage(path);
-        }
-        public SearchPage ChooseTag(string name)
-        {
-            tagBtn(name).Click();
-            return new SearchPage();
         }
 
     }

@@ -18,14 +18,36 @@ namespace ATframework3demo.TestCases
                             new TestCase("Поиск фестиваля по тегу", homePage => SearchFestivalOnTag(homePage)),
                             new TestCase("Поиск фестиваля по нескольким тегам", homePage => SearchFestivalOnTags(homePage)),
                             new TestCase("Поиск фестиваля по названию без учета регистра", homePage => SearchFestivalUnRegistred(homePage)),
-
+                            new TestCase("Переход на детальную карточку найденного фестиваля", homePage => OpenDetailFestivalOnName(homePage)),
                         };
+        }
+
+        private void OpenDetailFestivalOnName(SearchPage homePage)
+        {
+            User testUser = new User(true);
+            User.CreateUser(testUser);
+            Tag tag = new Tag("Музыка", homePage.PortalInfo);
+            Festival festival = new Festival(0, 0, "", homePage.PortalInfo);
+            festival.insertFestival(testUser);
+            festival.addTags(tag);
+            Venue venue = new Venue("", "", "", "", homePage.PortalInfo);
+            Event testEvent = new Event(0, 0, 6, 7, "", "", "", homePage.PortalInfo);
+            festival.addVenue(venue);
+            venue.AddEvent(testEvent);
+            testEvent.AddPhotoEvent();
+            venue.AddPhotoVenue();
+            festival.AddPhotoFestival();
+            homePage
+                .GoToHeader()
+                .FilterByName(festival.Name)
+                .GetFestivalPosterByName(festival.Name)
+                .OpenDetailPage()
+                .assertTitle(festival.Name);
         }
 
         private void SearchFestivalUnRegistred(SearchPage homePage)
         {
             User testUser = new User(true);
-            Console.WriteLine(testUser.LoginAkaEmail);
             User.CreateUser(testUser);
             Tag tag = new Tag("Музыка", homePage.PortalInfo);
             Festival festival = new Festival(0, 0, "", homePage.PortalInfo);
@@ -78,9 +100,11 @@ namespace ATframework3demo.TestCases
             festival.AddPhotoFestival();
             WebDriverActions.Refresh();
             homePage
+                .OpenFilterForm()
                 .ChooseTag(tag1.Name)
                 .ChooseTag(tag2.Name)
-                .ChooseTag(tag3.Name);
+                .ChooseTag(tag3.Name)
+                .ApplyChangesAndCloseFilter();
 
             var result = homePage
                 .GetFestivalPosterByName(festival.Name)
@@ -111,7 +135,9 @@ namespace ATframework3demo.TestCases
             festival.AddPhotoFestival();
             WebDriverActions.Refresh();
             homePage
-                .ChooseTag(tag.Name);
+                .OpenFilterForm()
+                .ChooseTag(tag.Name)
+                .ApplyChangesAndCloseFilter();
 
             var result = homePage
                 .GetFestivalPosterByName(festival.Name)

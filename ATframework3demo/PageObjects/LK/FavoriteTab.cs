@@ -10,5 +10,10 @@ namespace ATframework3demo.PageObjects.LK
         {
             Driver = driver;
         }
+        public FavoritesCard GetFavoriteCard(string name)
+        {
+            string path = $"//section[@id='favorites']//h3[text()='{name}']/ancestor::div[@class='festival-card']";
+            return new FavoritesCard(path);
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace ATframework3demo.PageObjects.LK
         }
         public ParticipationCard GetParticipationCardByName(string name)
         {
-            string path = $"//div[@class='festival-card'][.//h3[text()='{name}']]";
+            string path = $"//section[@id='participation']//h3[text()='{name}']/ancestor::div[@class='festival-card']";
             return new ParticipationCard(path);
         }
     }

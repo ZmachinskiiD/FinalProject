@@ -1,4 +1,5 @@
-﻿using atFrameWork2.SeleniumFramework;
+﻿using atFrameWork2.PageObjects;
+using atFrameWork2.SeleniumFramework;
 using OpenQA.Selenium;
 
 namespace ATframework3demo.PageObjects
@@ -31,6 +32,37 @@ namespace ATframework3demo.PageObjects
         public bool assertNameCard(string name)
         {
             return nameFestival(name).WaitElementDisplayed(3);
+        }
+        public FestivalDetailPage OpenDetailPage()
+        {
+            detailBtn.Hover();
+            detailBtn.Click();
+            return new FestivalDetailPage();
+        }
+
+        public FestivalPosterPage AddToFavoriteAuth()
+        {
+            likeBtn.Hover();
+            likeBtn.Click();
+            return new FestivalPosterPage(Path);
+        }
+        public LoginPage AddToFavoriteUnAuth()
+        {
+            likeBtn.Hover();
+            likeBtn.Click();
+            return new LoginPage();
+        }
+        public FestivalPosterPage AddToParticipationAuth()
+        {
+            participatingBtn.Hover();
+            participatingBtn.Click();
+            return new FestivalPosterPage(Path);
+        }
+        public LoginPage AddToParticipationUnAuth()
+        {
+            participatingBtn.Hover();
+            participatingBtn.Click();
+            return new LoginPage();
         }
 
     }
