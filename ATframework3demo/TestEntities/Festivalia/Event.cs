@@ -17,7 +17,8 @@ namespace ATframework3demo.TestEntities.Festivalia
         public Event(int dateStart = 0, int dateEnd = 0, int timeStartFromNow = 6, int timeEndFromNow = 7, string name = "Событие",  string photoPath = "", string description = "", PortalInfo? portalInfo = null)
         {
             PhotoPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..")) + @"\TestData\eventCover.jpg";
-            Name = "Событие" + HelperMethods.GetDateTimeSaltString(true, 4);
+            Name = "Событие" + HelperMethods.GetDateTimeSaltString(true, 10
+                );
             Description = "Описание" + HelperMethods.GetDateTimeSaltString(true, 21);
             DateStart = HelperMethods.GetDate(dateStart);
             DateEnd = HelperMethods.GetDate(dateEnd);

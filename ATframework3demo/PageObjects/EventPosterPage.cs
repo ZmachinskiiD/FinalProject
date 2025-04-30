@@ -12,7 +12,7 @@ namespace ATframework3demo.PageObjects
         }
         public IWebDriver Driver { get; }
         public string Path { get; }
-        WebItem eventDescription =>new WebItem(Path+"//p[@class='venue-subtitle']","Описание площадки");
+        WebItem eventDescription =>new WebItem(Path+"//p[@class='item-desc']","Описание площадки");
         public bool assertDescriptionText(string text)
         {
             var result = eventDescription.AssertTextContains(text,$"Ожидался {text}");

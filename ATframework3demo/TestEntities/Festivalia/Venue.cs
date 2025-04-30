@@ -15,7 +15,7 @@ namespace ATframework3demo.TestEntities.Festivalia
         public Venue(string name = "Площадка", string shortDescription = "Краткое описание", string photoPath = "Путь к фото", string description = "Описание площадки", PortalInfo? portalInfo = null)
         {
             PhotoPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..")) + @"\TestData\venueCover.jpg";
-            Name = "Площадка" + HelperMethods.GetDateTimeSaltString(true, 4);
+            Name = "Площадка" + HelperMethods.GetDateTimeSaltString(true, 10);
             ShortDescription = "Краткое " + HelperMethods.GetDateTimeSaltString(true, 4);
             Description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
             PortalInfo = portalInfo;

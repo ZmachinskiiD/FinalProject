@@ -48,6 +48,19 @@ namespace ATframework3demo.PageObjects
             }
 
         }
+        public bool assertFestivalDoesntExistOnMain(string name)
+        {
+            WebItem festivalName =
+             new WebItem($"//article[@class=\"festival-card\"][.//h3[contains(text(), '{name}')]]",
+                $"Кнопка подробнее о фестивале по названию {name}");
+            var result=festivalName.WaitElementDisplayed(3);
+            if (result == false)
+            {
+                return result;
+            }
+            throw new Exception("Найден фестиваль на главной который должен быть черновиком");
+
+        }
         public FestivalDetailPage goToFestivalPage(string festivalId)
         {
             WebItem festivalButton =
