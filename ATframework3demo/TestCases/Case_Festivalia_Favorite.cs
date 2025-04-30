@@ -55,8 +55,8 @@ namespace ATframework3demo.TestCases
                 .GoToMyFestivalsTab()
                 .GetFestivalCardByName(festival.Name)
                 .OpenMenu()
-                .UnPublishedFestival()
-                .ConfirmChangePublished();
+                .pressTheChangeStatusButton()
+                .ToDrafts();
             WebDriverActions.OpenUri(homePage.PortalInfo.PortalUri, homePage.Driver);
                 var addAfterUnPibhlished =
                 homePage
