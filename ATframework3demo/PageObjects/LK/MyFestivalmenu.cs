@@ -21,5 +21,10 @@ namespace ATframework3demo.PageObjects.LK
             editButton.Click(Driver);
             return new ConstructorMainInfo(Driver);
         }
+        public ConstructorConfirmPublication pressTheChangeStatusButton()
+        {
+            changeStatusButton.Click(Driver);
+            return new ConstructorConfirmPublication(Driver);
+        }
     }
 }
