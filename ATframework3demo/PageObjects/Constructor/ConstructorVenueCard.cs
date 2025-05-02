@@ -20,5 +20,9 @@ namespace ATframework3demo.PageObjects.Constructor
             editButton.Click();
             return new ConstructorVenueForm();
         }
+        public void deleteVenue()
+        {
+            deleteButton.Click();
+        }
     }
 }

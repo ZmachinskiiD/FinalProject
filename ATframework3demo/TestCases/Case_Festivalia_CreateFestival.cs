@@ -19,8 +19,7 @@ namespace ATframework3demo.TestCases
                 new TestCase("Создание фестиваля", homePage => CreateFestival(homePage)),
                 new TestCase("Создание черновика фестиваля", homePage => CreateFestivalDraft(homePage)),
                 new TestCase("Создание фестиваля c датой начала больше даты конца", homePage => CreateDateStartBiggerthanDateEnd(homePage)),
-                new TestCase("Создание фестиваля c датой начала меньше сегодня", homePage => CreateFestivalBeforeToday(homePage)),
-                //new TestCase("ФФФФФ", homePage => Placeholder(homePage)),
+                //new TestCase("Создание фестиваля c датой начала меньше сегодня", homePage => CreateFestivalBeforeToday(homePage)),
 
             };
             }
@@ -56,6 +55,15 @@ namespace ATframework3demo.TestCases
                 upperTab.goTomapPage().publishFestival().ConfirmPublication().
                     //FindTheFestival(festival.Name);
                     GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name).FindTheFestival();
+                var header= new HeaderPage();
+                header.FilterByName(festival.Name).findTheFestival(festival.Name);
+                var festivalPage=homePage.GoToFestivalPageByName(festival.Name);
+                festivalPage.assertTitle(festival.Name);
+                festivalPage.assertDescription(festival.Description);
+                var venuePage = festivalPage.GetVenueByName(venue.Name).GoToVenueDetail();
+                venuePage.assertTitle(venue.Name);
+                venuePage.assertDescription(venue.Description);
+                venuePage.FindEventByName(EEvent.Name).assertDescriptionText(EEvent.Description);
 
 
             }
@@ -93,6 +101,7 @@ namespace ATframework3demo.TestCases
 
 
             }
+            //Неактуально для текущей версии. Оставлено для возможного дальнейшего тестирования
             public static void CreateFestivalBeforeToday(SearchPage homePage)
             {
                 var testUser = new User(true);
@@ -105,29 +114,7 @@ namespace ATframework3demo.TestCases
                     GoToConstructor().
                     PassData(festival).SaveData().AssertStartDateIsIncorrect();
             }
-            //public static void Placeholder(SearchPage homePage)
-            //{
-            //    var testUser = new User(true);
-            //    User.CreateUser(testUser);
-            //    var name = "Название" + HelperMethods.GetDateTimeSaltString(true, 4);
-            //    var shortdesc = "Краткое" + HelperMethods.GetDateTimeSaltString(true, 4);
-            //    var description = "Полное Описание " + HelperMethods.GetDateTimeSaltString(true, 21);
-            //    var dateStart = HelperMethods.GetDate(1,true);
-            //    var dateEnd = HelperMethods.GetDate(1,true);
-            //    var timeStart = HelperMethods.GetTimeOfFestival(7);
-            //    var timeEnd = HelperMethods.GetTimeOfFestival(10);
-
-            //    var festival = new Festival(name, shortdesc, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description, dateStart, dateEnd, "Музыка", "\"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp\"");
-            //    var venue = new Venue(name, shortdesc, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description);
-            //    var EEvent = new Event(name, @"C:\\Users\\Admin\\Pictures\\Важные фотки\\_3_2025___1.png.webp", description, dateStart, dateEnd, timeStart, timeEnd);
-
-            //    var tagId = Festival.InsertTag($"{HelperMethods.GetDateTimeSaltString(true, 4)}", homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
-            //    var festivalId = Festival.insertFestival(festival, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin,testUser.LoginAkaEmail);
-            //   Festival.addTags(festivalId, tagId, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
-            //    var venueID= Festival.addVenue(festivalId,venue, homePage.PortalInfo.PortalUri,homePage.PortalInfo.PortalAdmin);
-            //    var eventID = Festival.addEvent(venueID, EEvent, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
-            //    Festival.addPhotos(festivalId, venueID, eventID, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
-            //}
+            
         }
     }
 }

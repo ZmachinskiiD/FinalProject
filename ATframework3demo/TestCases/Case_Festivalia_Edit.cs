@@ -4,6 +4,7 @@ using atFrameWork2.TestEntities;
 using ATframework3demo.PageObjects;
 using ATframework3demo.PageObjects.Constructor;
 using ATframework3demo.TestEntities.Festivalia;
+using Microsoft.Extensions.Logging;
 
 namespace ATframework3demo.TestCases
 {
@@ -20,6 +21,7 @@ namespace ATframework3demo.TestCases
                             new TestCase("Редактирование информации о событии", homePage => EditEventInfo(homePage)),
                              new TestCase("Перенос фестиваля в черновики", homePage => makeFestivalADraft(homePage)),
                              new TestCase("Публикация фестиваля", homePage => PublishFestival(homePage)),
+                             new TestCase("Удаление площадки", homePage => CheckForTheDeletionOfTheVenue(homePage)),
                         };
             }
             public static void EditMainInfo(SearchPage homePage)
@@ -121,6 +123,42 @@ namespace ATframework3demo.TestCases
                    .OpenMenu().pressTheChangeStatusButton().Publish();
                 var header = new HeaderPage();
                 header.FilterByName(festival.Name).findTheFestival(festival.Name);
+            }
+            public static void CheckForTheDeletionOfTheVenue(SearchPage homePage)
+            {
+                var testUser = new User(true);
+                User.CreateUser(testUser);
+                var tag = new Tag("Активный отдых", homePage.PortalInfo);
+                var festival = new Festival(11, 40, null, homePage.PortalInfo);
+                var venue = new Venue(null, null, null, null, homePage.PortalInfo);
+                var venue2 = new Venue("ПЛ2", null, null, null, homePage.PortalInfo);
+                var EEvent = new Event(13, 13);
+                var festId = festival.insertFestival(testUser);
+                festival.addTagByName(tag.Name);
+                var venueId = festival.addVenue(venue);
+                var venueId2 = festival.addVenue(venue2);
+                var eventId = venue.AddEvent(EEvent); 
+                Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+                venue2.AddPhotoVenue();
+                homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name)
+                    .OpenMenu().OpenFestivalForEdit();
+                var FestivalUpperTab = new ConstructorUpperTab();
+                FestivalUpperTab.goToVenuePage().OpenVenueCard(venue2.Name).deleteVenue();
+                WebDriverActions.BrowserAlert(true);
+                var header = new HeaderPage();
+                header.FilterByName(festival.Name).goToFestivalPage(festId).GetVenueByName(venue2.Name).assertVenueDoesntExist();
+
+
+
+            }
+            public static void test(SearchPage homePage)
+            {
+                 var testUser = new User(true);
+                User.CreateUser(testUser);
+                var festival = new Festival(11, 40, null, homePage.PortalInfo);
+                var festId = festival.insertFestival(testUser);
+                var tag = new Tag("Активный отдых", homePage.PortalInfo);
+                festival.addTagByName(tag.Name);
             }
         }
     }

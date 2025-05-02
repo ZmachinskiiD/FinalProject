@@ -20,6 +20,15 @@ namespace ATframework3demo.PageObjects
             venueProgramBtn.Click();
             return new VenueDetailPage();
         }
+        public bool assertVenueDoesntExist()
+        {
+            var result = venueProgramBtn.WaitElementDisplayed(3);
+            if (result == false)
+            {
+                return result;
+            }
+            throw new Exception("Найдена площадка которую должны были удалить");
+        }
 
 
         

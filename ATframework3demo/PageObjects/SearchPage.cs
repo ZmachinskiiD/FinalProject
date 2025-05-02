@@ -76,6 +76,15 @@ namespace ATframework3demo.PageObjects
             festivalButton.Click();
            return new FestivalDetailPage();
         }
+        public  FestivalDetailPage GoToFestivalPageByName(string name)
+        {
+            WebItem festivalName =
+             new WebItem($"//article[@class=\"festival-card\"][.//h3[contains(text(), '{name}')]]//a",
+                $"Кнопка подробнее о фестивале по названию {name}");
+            festivalName.Click();
+            return new FestivalDetailPage();
+
+        }
 
         public FestivalPosterPage GetFestivalPosterByName(string name)
         {

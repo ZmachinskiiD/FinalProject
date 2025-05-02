@@ -49,5 +49,15 @@ namespace ATframework3demo.PageObjects.LK
             logoutButton.Click();
             return new SearchPage(Driver);
         }
+        public bool assertMyFestivalTabDoNotExist()
+        {
+     
+            var result = myFestButton.WaitElementDisplayed(3);
+            if (result == false)
+            {
+                return result;
+            }
+            throw new Exception("Таб присутствует а не должен!");
+        }
     }
 }
