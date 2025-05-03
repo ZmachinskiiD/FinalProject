@@ -14,18 +14,26 @@ namespace ATframework3demo.PageObjects.LK
         }
         WebItem moreButton => new WebItem(Path + "//a[@class='details-btn']", "Кнопка подробнее у карточки");
         WebItem titleCard(string name) => new WebItem(Path + $"//h3[text()='{name}']", $"Название карточки: {name}");
+        
         public MyFestivalTab returnToTab()
         {
             return new MyFestivalTab(Driver);
         }
         public FestivalDetailPage goToDetail()
         {
+            moreButton.Hover();
             moreButton.Click();
             return new FestivalDetailPage(Driver);
         }
         public bool assertByName(string name)
         {
-            return titleCard(name).WaitElementDisplayed();
+            bool result = titleCard(name).WaitElementDisplayed(2);
+            if (result) 
+            {
+                titleCard(name).Hover();
+
+            }
+            return result;
         }
     }
 }

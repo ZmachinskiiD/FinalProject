@@ -22,15 +22,20 @@ namespace ATframework3demo.PageObjects.LK
             return new FavoriteTab(Driver);
         }
         public FestivalDetailPage goToDetail()
-
         {
+            moreButton.Hover();
             moreButton.Click();
             return new FestivalDetailPage(Driver);
         }
 
         public bool assertByName(string name)
         {
-            return titleCard(name).WaitElementDisplayed();
+            var result = titleCard(name).WaitElementDisplayed();
+            if (result)
+            {
+                titleCard(name).Hover();
+            }
+            return result;
         }
 
     }

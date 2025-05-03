@@ -24,6 +24,7 @@ namespace ATframework3demo.PageObjects.LK
         public FestivalDetailPage GoToDetail()
 
         {
+            moreButton.Hover();
             moreButton.Click();
             return new FestivalDetailPage(Driver);
         }
@@ -37,6 +38,7 @@ namespace ATframework3demo.PageObjects.LK
         }
         public MyFestivalmenu OpenMenu()
         {
+            menuButton.Hover();
             menuButton.Click();
             return new MyFestivalmenu(Path, Driver);
         }

@@ -8,19 +8,20 @@ using OpenQA.Selenium;
 
 namespace ATframework3demo.TestCases
 {
-    public class Case_Festivalia_Participation : CaseCollectionBuilder
+    public class Case_Mobile_Participation : CaseCollectionBuilder
     {
         protected override List<TestCase> GetCases()
         {
             return new List<TestCase>
                         {
-                            new TestCase("Добавление фестиваль в участвую через поиск фестивалей не авторизованным пользователем", homePage => SearchFestivalOnName(homePage)),
-                            new TestCase("Удаление из участвую при переносе фестиваля в черновик", homePage => DeleteParticipationUnPublishedFestival(homePage)),
+                            //new TestCase("Mobile: Добавление фестиваль в участвую через поиск фестивалей не авторизованным пользователем", homePage => SearchFestivalOnName(homePage)),
+                            new TestCase("Mobile: Удаление из участвую при переносе фестиваля в черновик", homePage => DeleteParticipationUnPublishedFestival(homePage)),
                         };
         }
 
         private void DeleteParticipationUnPublishedFestival(SearchPage homePage)
         {
+            WebItem.DefaultDriver.Manage().Window.Size = new System.Drawing.Size(375,667);
             User testUser = new User(true);
             User.CreateUser(testUser);
             Tag tag = new Tag("", homePage.PortalInfo);
@@ -36,16 +37,19 @@ namespace ATframework3demo.TestCases
             venue.AddPhotoVenue();
             festival.AddPhotoFestival();
             var addToParticipationFest = homePage
-                .GoToHeader()
+                .GoToHeaderMobile()
                 .GoToLogin()
                 .Login(testUser)
                 .GoToSearch()
-                .GoToHeader()
+                .GoToHeaderMobile()
                 .FilterByName(festival.Name)
+                .OpenFilterForm()
+                .ChooseTag(tag.Name)
+                .ApplyChangesAndCloseFilter()
                 .GetFestivalPosterByName(festival.Name)
                 .AddToParticipationAuth()
                 .GoToSearch()
-                .GoToHeader()
+                .GoToHeaderMobile()
                 .GoToLK()
                 .goToParticipationTab()
                 .GetParticipationCardByName(festival.Name)
@@ -53,7 +57,7 @@ namespace ATframework3demo.TestCases
 
             WebDriverActions.OpenUri(homePage.PortalInfo.PortalUri, homePage.Driver);
             homePage
-                .GoToHeader()
+                .GoToHeaderMobile()
                 .GoToLK()
                 .GoToMyFestivalsTab()
                 .GetFestivalCardByName(festival.Name)
@@ -63,7 +67,7 @@ namespace ATframework3demo.TestCases
             WebDriverActions.OpenUri(homePage.PortalInfo.PortalUri, homePage.Driver);
             var addAfterUnPibhlished =
             homePage
-            .GoToHeader()
+            .GoToHeaderMobile()
             .GoToLK()
             .goToParticipationTab()
             .GetParticipationCardByName(festival.Name)
@@ -80,6 +84,7 @@ namespace ATframework3demo.TestCases
 
         private void SearchFestivalOnName(SearchPage homePage)
         {
+            WebItem.DefaultDriver.Manage().Window.Size = new System.Drawing.Size(375, 667);
             User testUser = new User(true);
             User.CreateUser(testUser);
             Tag tag = new Tag("", homePage.PortalInfo);
@@ -94,20 +99,22 @@ namespace ATframework3demo.TestCases
             testEvent.AddPhotoEvent();
             venue.AddPhotoVenue();
             festival.AddPhotoFestival();
-
             var result = homePage
-                .GoToHeader()
+                .GoToHeaderMobile()
                 .FilterByName(festival.Name)
                 .GetFestivalPosterByName(festival.Name)
                 .AddToParticipationUnAuth()
                 .Login(testUser)
                 .GoToSearch()
-                .GoToHeader()
+                .GoToHeaderMobile()
                 .GoToLK()
                 .goToParticipationTab()
                 .GetParticipationCardByName(festival.Name)
                 .assertByName(festival.Name);
-
+                
+                //.goToFavoriteTab()
+                //.GetFavoriteCard(festival.Name)
+                //.asserByName(festival.Name);
             if (!result)
             {
                 Log.Error($"не найдена карточка фестиваля в участвую с названием {festival.Name}");

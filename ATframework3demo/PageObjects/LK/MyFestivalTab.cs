@@ -20,6 +20,7 @@ namespace ATframework3demo.PageObjects.LK
         public MyFestivalCard GetFestivalCardByName(string name)
         {
             string path = $"//div[@class='festival-card'][.//h3[text()='{name}']]";
+            new WebItem(path, name).Hover();
             return new MyFestivalCard(path);
         }
         public MyFestivalCard GetFestivalCardByID(string id)

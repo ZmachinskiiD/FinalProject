@@ -18,11 +18,13 @@ namespace ATframework3demo.PageObjects.LK
         WebItem changeStatusButton => new WebItem(Path + "//i[contains(@class,'fa-toggle')]", "Кнопка переключения статуса");
         public ConstructorMainInfo OpenFestivalForEdit()
         {
+            editButton.Hover(Driver);
             editButton.Click(Driver);
             return new ConstructorMainInfo(Driver);
         }
         public ConstructorConfirmPublication pressTheChangeStatusButton()
         {
+            changeStatusButton.Hover(Driver);
             changeStatusButton.Click(Driver);
             return new ConstructorConfirmPublication(Driver);
         }

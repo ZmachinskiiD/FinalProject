@@ -1,5 +1,6 @@
 ﻿using atFrameWork2.SeleniumFramework;
 using atFrameWork2.TestEntities;
+using ATframework3demo.PageObjects.Mobile;
 using OpenQA.Selenium;
 using System.Xml.Linq;
 
@@ -11,14 +12,12 @@ namespace ATframework3demo.PageObjects
         {
             toggleBtn.WaitElementDisplayed();
             Driver = driver;
-            Driver.Manage().Window.Size = new System.Drawing.Size(500, 500);
         }
         public SearchPage(PortalInfo portal,IWebDriver driver = default)
         {
             toggleBtn.WaitElementDisplayed();
             Driver = driver;
             PortalInfo = portal;
-            Driver.Manage().Window.Size = new System.Drawing.Size(500, 500);
         }
         
         public IWebDriver Driver { get; }
@@ -40,6 +39,10 @@ namespace ATframework3demo.PageObjects
         public HeaderPage GoToHeader()
         {
             return new HeaderPage();
+        }
+        public HeaderPageMobile GoToHeaderMobile()
+        {
+            return new HeaderPageMobile();
         }
         public SearchFilterPage OpenFilterForm()
         {
