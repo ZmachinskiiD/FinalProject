@@ -88,7 +88,7 @@ namespace ATframework3demo.PageObjects
 
         public FestivalPosterPage GetFestivalPosterByName(string name)
         {
-            string path = $"//img[@alt='{name}']/ancestor::article[@class='festival-card'][1]";
+            string path = $"//h3[text()='{name}']/ancestor::article[@class='festival-card'][1]";
             return new FestivalPosterPage(path);
         }
 

@@ -26,7 +26,8 @@ namespace ATframework3demo.TestCases
         {
             User testUser = new User(true);
             User.CreateUser(testUser);
-            Tag tag = new Tag("Музыка", homePage.PortalInfo);
+            Tag tag = new Tag("", homePage.PortalInfo);
+            tag.InsertTag();
             Festival festival = new Festival(0, 0, "", homePage.PortalInfo);
             festival.insertFestival(testUser);
             festival.addTags(tag);
@@ -49,7 +50,8 @@ namespace ATframework3demo.TestCases
         {
             User testUser = new User(true);
             User.CreateUser(testUser);
-            Tag tag = new Tag("Музыка", homePage.PortalInfo);
+            Tag tag = new Tag("", homePage.PortalInfo);
+            tag.InsertTag();
             Festival festival = new Festival(0, 0, "", homePage.PortalInfo);
             festival.Name = festival.Name.ToUpper();
             festival.insertFestival(testUser);
@@ -154,7 +156,8 @@ namespace ATframework3demo.TestCases
             User testUser = new User(true);
             Console.WriteLine(testUser.LoginAkaEmail);
             User.CreateUser(testUser);
-            Tag tag = new Tag("Музыка",homePage.PortalInfo);
+            Tag tag = new Tag("",homePage.PortalInfo);
+            tag.InsertTag();
             Festival festival = new Festival(0,0,"",homePage.PortalInfo);
             festival.insertFestival(testUser);
             festival.addTags(tag);
