@@ -13,7 +13,7 @@ namespace ATframework3demo.TestCases
         {
             return new List<TestCase>
                         {
-                            new TestCase("Добавление фестиваль в избранное через поиск фестивалей не авторизованным пользователем", homePage => AddFavoriteInSearch(homePage)),
+                            new TestCase("Добавление фестиваль в избранное с последующей авторизацией", homePage => AddFavoriteUnAuthUser(homePage)),
                             new TestCase("Удаление из избранного при переносе фестиваля в черновик", homePage => DeleteFavoriteUnPublishedFestival(homePage)),
                         };
         }
@@ -73,13 +73,10 @@ namespace ATframework3demo.TestCases
                 if (addAfterUnPibhlished)
             {
                 Log.Error($"Фестиваль {festival.Name} Не удалился из избранного после переноса фестиваля в черновик");
-            }
-            
-                
-
+            }         
         }
 
-        private void AddFavoriteInSearch(SearchPage homePage)
+        private void AddFavoriteUnAuthUser(SearchPage homePage)
         {
             User testUser = new User(true);
             User.CreateUser(testUser);

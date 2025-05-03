@@ -14,7 +14,7 @@ namespace ATframework3demo.TestCases
         {
             return new List<TestCase>
                         {
-                            new TestCase("Добавление фестиваль в участвую через поиск фестивалей не авторизованным пользователем", homePage => SearchFestivalOnName(homePage)),
+                            new TestCase("Добавление фестиваль в участвую с последующей авторизацией", homePage => AddToPartipicationUnAuthUser(homePage)),
                             new TestCase("Удаление из участвую при переносе фестиваля в черновик", homePage => DeleteParticipationUnPublishedFestival(homePage)),
                         };
         }
@@ -78,7 +78,7 @@ namespace ATframework3demo.TestCases
             }
         }
 
-        private void SearchFestivalOnName(SearchPage homePage)
+        private void AddToPartipicationUnAuthUser(SearchPage homePage)
         {
             User testUser = new User(true);
             User.CreateUser(testUser);

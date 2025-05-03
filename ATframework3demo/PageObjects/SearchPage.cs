@@ -10,21 +10,18 @@ namespace ATframework3demo.PageObjects
     {
         public SearchPage(IWebDriver driver = default)
         {
-            toggleBtn.WaitElementDisplayed();
+            toggleBtn.WaitElementDisplayed(3);
             Driver = driver;
         }
         public SearchPage(PortalInfo portal,IWebDriver driver = default)
         {
-            toggleBtn.WaitElementDisplayed();
+            toggleBtn.WaitElementDisplayed(3);
             Driver = driver;
             PortalInfo = portal;
         }
         
         public IWebDriver Driver { get; }
         public PortalInfo PortalInfo { get; }
-
-       
-
         
         WebItem emptyStateMessage =>
             new WebItem("//div[@class='no-festivals-message']",

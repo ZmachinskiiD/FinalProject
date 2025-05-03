@@ -16,10 +16,14 @@ namespace ATframework3demo.TestCases
             {
                 return new List<TestCase>
             {
-                new TestCase("Создание фестиваля  - Змачинский ", homePage => CreateFestival(homePage)),
-                new TestCase("Создание черновика фестиваля  - Змачинский", homePage => CreateFestivalDraft(homePage)),
-                new TestCase("Создание фестиваля c датой начала больше даты конца - Змачинский", homePage => CreateDateStartBiggerthanDateEnd(homePage)),
-                //new TestCase("Создание фестиваля c датой начала меньше сегодня", homePage => CreateFestivalBeforeToday(homePage)),
+                new TestCase("Создание фестиваля", homePage => CreateFestival(homePage)),
+                new TestCase("Создание черновика фестиваля", homePage => CreateFestivalDraft(homePage)),
+                new TestCase("Создание фестиваля c датой начала больше даты конца", homePage => CreateDateStartBiggerthanDateEnd(homePage)),
+                new TestCase("Создание фестиваля c датой начала меньше сегодня", homePage => CreateFestivalBeforeToday(homePage)),
+                //new TestCase("ФФФФФ", homePage => Placeholder(homePage)),
+
+
+
 
             };
             }

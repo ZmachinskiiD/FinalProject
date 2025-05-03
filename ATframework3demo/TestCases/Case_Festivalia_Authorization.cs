@@ -13,8 +13,6 @@ namespace ATframework3demo.TestCases
             {
                 new TestCase("Авторизация существующего пользователя", homePage => AuthorizationExistUser(homePage)),
                 new TestCase("Авторизация с незарегестрированным email", homePage => AuthorizationUnRegEmail(homePage)),
-
-
             };
         }
 
@@ -26,14 +24,12 @@ namespace ATframework3demo.TestCases
                 .GoToLogin()
                 .Login(testUser)
                 .ErrorEmailorPwdDisplayed();
-
             if (!result)
             {
                 Log.Error("Не появилась ошибка о неправильно заполненом email или пароле");
             }
                 
         }
-
         private void AuthorizationExistUser(SearchPage homePage)
         {
             User testUser = new User();
@@ -47,7 +43,6 @@ namespace ATframework3demo.TestCases
                 .GoToLK()
                 .goToMyDataTab()
                 .EmailIsDisplayed(testUser.LoginAkaEmail);
-
             if (!result)
             {
                 Log.Error($"В личном кабинете не отображается email: {testUser.LoginAkaEmail}");
