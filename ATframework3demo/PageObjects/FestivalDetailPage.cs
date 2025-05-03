@@ -1,5 +1,7 @@
 ﻿using atFrameWork2.SeleniumFramework;
+using ATframework3demo.BaseFramework;
 using OpenQA.Selenium;
+using System.Globalization;
 
 namespace ATframework3demo.PageObjects
 {
@@ -20,6 +22,9 @@ namespace ATframework3demo.PageObjects
         WebItem festivalTitle =>
             new WebItem("//*[@class='festival-title']",
                 "Название фестиваля");
+        WebItem festivalDates =>
+            new WebItem("//div[@class='festival-dates']",
+                "Даты фестиваля");
         WebItem festivalDescription =>
             new WebItem("//*[@class='festival-description']",
                 "Описание фестиваля");
@@ -50,7 +55,20 @@ namespace ATframework3demo.PageObjects
             }
             return result;
         }
-      
+        public bool AssertDates(string Begin,string End)
+        {
+          
+            var beginFest=HelperMethods.TransformDateToRussian(Begin);
+            var endFest= HelperMethods.TransformDateToRussian(End);
+            var result = festivalDates.AssertTextContains($"{beginFest} - {endFest}", $"{beginFest} - {endFest}");
+            if (!result)
+            {
+                throw new Exception("Неверные даты");
+            }
+            return result;
+        }
+
+
 
 
     }

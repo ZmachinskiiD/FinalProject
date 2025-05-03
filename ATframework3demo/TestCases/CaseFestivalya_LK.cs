@@ -11,9 +11,11 @@ namespace ATframework3demo.TestCases
         {
             return new List<TestCase>
             {
-                new TestCase("Отсутствие таба Мои фестивали у посетителя", homePage => ValidateVisitortabs(homePage)),
-                new TestCase("Публикация фестиваля без события", homePage => publishFestivalWithoutEvents(homePage)),
-                new TestCase("Публикация фестиваля без площадок", homePage => publishFestivalWithoutVenues(homePage)),
+                new TestCase("Отсутствие таба Мои фестивали у посетителя - Змачинский", homePage => ValidateVisitortabs(homePage)),
+                new TestCase("Публикация фестиваля без события - Змачинский", homePage => publishFestivalWithoutEvents(homePage)),
+                new TestCase("Публикация фестиваля без площадок - Змачинский", homePage => publishFestivalWithoutVenues(homePage)),
+                new TestCase("Перенос фестиваля в черновики - Змачинский", homePage => makeFestivalADraft(homePage)),
+                new TestCase("Публикация фестиваля - Змачинский", homePage => PublishFestival(homePage)),
 
             };
         }
@@ -60,6 +62,42 @@ namespace ATframework3demo.TestCases
             var header = new HeaderPage();
             header.FilterByName(festival.Name).assertFestivalDoesntExistOnMain(festival.Name);
 
+        }
+        public static void makeFestivalADraft(SearchPage homePage)
+        {
+            var testUser = new User(true);
+            User.CreateUser(testUser);
+            var tag = new Tag("Активный отдых", homePage.PortalInfo);
+            var festival = new Festival(11, 40, null, homePage.PortalInfo);
+            var venue = new Venue(null, null, null, null, homePage.PortalInfo);
+            var EEvent = new Event(13, 13);
+            var festId = festival.insertFestival(testUser);
+            festival.addTagByName(tag.Name);
+            var venueId = festival.addVenue(venue);
+            var eventId = venue.AddEvent(EEvent);
+            Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+            homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name)
+               .OpenMenu().pressTheChangeStatusButton().ToDrafts();
+            var header = new HeaderPage();
+            header.FilterByName(festival.Name).assertFestivalDoesntExistOnMain(festival.Name);
+        }
+        public static void PublishFestival(SearchPage homePage)
+        {
+            var testUser = new User(true);
+            User.CreateUser(testUser);
+            var tag = new Tag("Активный отдых", homePage.PortalInfo);
+            var festival = new Festival(11, 40, null, homePage.PortalInfo);
+            var venue = new Venue(null, null, null, null, homePage.PortalInfo);
+            var EEvent = new Event(13, 13);
+            var festId = festival.insertFestival(testUser, false);
+            festival.addTagByName(tag.Name);
+            var venueId = festival.addVenue(venue);
+            var eventId = venue.AddEvent(EEvent);
+            Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+            homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GoToDrafts().GetFestivalCardByName(festival.Name)
+               .OpenMenu().pressTheChangeStatusButton().Publish();
+            var header = new HeaderPage();
+            header.FilterByName(festival.Name).findTheFestival(festival.Name);
         }
     }
 }

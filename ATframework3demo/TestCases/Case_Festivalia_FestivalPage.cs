@@ -13,8 +13,8 @@ namespace ATframework3demo.TestCases
             {
                 return new List<TestCase>
                         {
-                            new TestCase("Переход на страницу фестиваля", homePage => GoToFestival(homePage)),
-                             new TestCase("Переход на страницу площадки", homePage => GoToVenuePage(homePage)),
+                            new TestCase("Переход на страницу фестиваля - Змачинский", homePage => GoToFestival(homePage)),
+                             new TestCase("Переход на страницу площадки - Змачинский", homePage => GoToVenuePage(homePage)),
                         };
             }
             public static void GoToFestival(SearchPage homePage)

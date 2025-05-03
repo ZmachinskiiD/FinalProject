@@ -16,9 +16,9 @@ namespace ATframework3demo.TestCases
             {
                 return new List<TestCase>
             {
-                new TestCase("Создание фестиваля", homePage => CreateFestival(homePage)),
-                new TestCase("Создание черновика фестиваля", homePage => CreateFestivalDraft(homePage)),
-                new TestCase("Создание фестиваля c датой начала больше даты конца", homePage => CreateDateStartBiggerthanDateEnd(homePage)),
+                new TestCase("Создание фестиваля  - Змачинский ", homePage => CreateFestival(homePage)),
+                new TestCase("Создание черновика фестиваля  - Змачинский", homePage => CreateFestivalDraft(homePage)),
+                new TestCase("Создание фестиваля c датой начала больше даты конца - Змачинский", homePage => CreateDateStartBiggerthanDateEnd(homePage)),
                 //new TestCase("Создание фестиваля c датой начала меньше сегодня", homePage => CreateFestivalBeforeToday(homePage)),
 
             };
@@ -53,13 +53,13 @@ namespace ATframework3demo.TestCases
                     saveChanges();
                 upperTab.goToEventPage().OpenEventFormForVenueByName(venue.Name).passData(EEvent).saveChanges();
                 upperTab.goTomapPage().publishFestival().ConfirmPublication().
-                    //FindTheFestival(festival.Name);
                     GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name).FindTheFestival();
                 var header= new HeaderPage();
                 header.FilterByName(festival.Name).findTheFestival(festival.Name);
                 var festivalPage=homePage.GoToFestivalPageByName(festival.Name);
                 festivalPage.assertTitle(festival.Name);
                 festivalPage.assertDescription(festival.Description);
+                festivalPage.AssertDates(festival.DateStart, festival.DateEnd);
                 var venuePage = festivalPage.GetVenueByName(venue.Name).GoToVenueDetail();
                 venuePage.assertTitle(venue.Name);
                 venuePage.assertDescription(venue.Description);

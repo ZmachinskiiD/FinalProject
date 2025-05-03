@@ -16,12 +16,10 @@ namespace ATframework3demo.TestCases
             {
                 return new List<TestCase>
                         {
-                            new TestCase("Редактирование основной информации о фестивале", homePage => EditMainInfo(homePage)),
-                            new TestCase("Редактирование информации о площадке", homePage => EditVenueInfo(homePage)),
-                            new TestCase("Редактирование информации о событии", homePage => EditEventInfo(homePage)),
-                             new TestCase("Перенос фестиваля в черновики", homePage => makeFestivalADraft(homePage)),
-                             new TestCase("Публикация фестиваля", homePage => PublishFestival(homePage)),
-                             new TestCase("Удаление площадки", homePage => CheckForTheDeletionOfTheVenue(homePage)),
+                            new TestCase("Редактирование основной информации о фестивале - Змачинский", homePage => EditMainInfo(homePage)),
+                            new TestCase("Редактирование информации о площадке - Змачинский", homePage => EditVenueInfo(homePage)),
+                            new TestCase("Редактирование информации о событии - Змачинский", homePage => EditEventInfo(homePage)),
+                             new TestCase("Удаление площадки - Змачинский", homePage => CheckForTheDeletionOfTheVenue(homePage)),
                         };
             }
             public static void EditMainInfo(SearchPage homePage)
@@ -41,7 +39,10 @@ namespace ATframework3demo.TestCases
                 var festivalNewInfo = new Festival(11, 40, null, homePage.PortalInfo);
                 homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name)
                     .OpenMenu().OpenFestivalForEdit().ClearData().PassData(festivalNewInfo).SaveData();
-                homePage.GoToHeader().FilterByName(festivalNewInfo.Name).goToFestivalPage(festId).assertDescription(festivalNewInfo.Description);
+                var festivalPage = homePage.GoToHeader().FilterByName(festivalNewInfo.Name).goToFestivalPage(festId);
+                festivalPage.assertTitle(festivalNewInfo.Name);
+                festivalPage.assertDescription(festivalNewInfo.Description);
+                festivalPage.AssertDates(festivalNewInfo.DateStart, festivalNewInfo.DateEnd);
 
             }
             public static void EditVenueInfo(SearchPage homePage)
@@ -88,42 +89,6 @@ namespace ATframework3demo.TestCases
                 var header = new HeaderPage();
                 header.FilterByName(festival.Name).goToFestivalPage(festId).GetVenueByName(venue.Name).GoToVenueDetail().FindEventByName(Event2.Name).assertDescriptionText(Event2.Description);
             }
-            public static void makeFestivalADraft(SearchPage homePage)
-            {
-                var testUser = new User(true);
-                User.CreateUser(testUser);
-                var tag = new Tag("Активный отдых", homePage.PortalInfo);
-                var festival = new Festival(11, 40, null, homePage.PortalInfo);
-                var venue = new Venue(null, null, null, null, homePage.PortalInfo);
-                var EEvent = new Event(13, 13);
-                var festId = festival.insertFestival(testUser);
-                festival.addTagByName(tag.Name);
-                var venueId = festival.addVenue(venue);
-                var eventId = venue.AddEvent(EEvent);
-                Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
-                homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name)
-                   .OpenMenu().pressTheChangeStatusButton().ToDrafts();
-                var header = new HeaderPage();
-                header.FilterByName(festival.Name).assertFestivalDoesntExistOnMain(festival.Name);
-            }
-            public static void PublishFestival(SearchPage homePage)
-            {
-                var testUser = new User(true);
-                User.CreateUser(testUser);
-                var tag = new Tag("Активный отдых", homePage.PortalInfo);
-                var festival = new Festival(11, 40, null, homePage.PortalInfo);
-                var venue = new Venue(null, null, null, null, homePage.PortalInfo);
-                var EEvent = new Event(13, 13);
-                var festId = festival.insertFestival(testUser,false);
-                festival.addTagByName(tag.Name);
-                var venueId = festival.addVenue(venue);
-                var eventId = venue.AddEvent(EEvent);
-                Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
-                homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GoToDrafts().GetFestivalCardByName(festival.Name)
-                   .OpenMenu().pressTheChangeStatusButton().Publish();
-                var header = new HeaderPage();
-                header.FilterByName(festival.Name).findTheFestival(festival.Name);
-            }
             public static void CheckForTheDeletionOfTheVenue(SearchPage homePage)
             {
                 var testUser = new User(true);
@@ -147,18 +112,6 @@ namespace ATframework3demo.TestCases
                 WebDriverActions.BrowserAlert(true);
                 var header = new HeaderPage();
                 header.FilterByName(festival.Name).goToFestivalPage(festId).GetVenueByName(venue2.Name).assertVenueDoesntExist();
-
-
-
-            }
-            public static void test(SearchPage homePage)
-            {
-                 var testUser = new User(true);
-                User.CreateUser(testUser);
-                var festival = new Festival(11, 40, null, homePage.PortalInfo);
-                var festId = festival.insertFestival(testUser);
-                var tag = new Tag("Активный отдых", homePage.PortalInfo);
-                festival.addTagByName(tag.Name);
             }
         }
     }

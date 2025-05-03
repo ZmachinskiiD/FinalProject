@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Globalization;
 using System.Text;
 
 namespace ATframework3demo.BaseFramework
@@ -87,6 +88,11 @@ namespace ATframework3demo.BaseFramework
             }
 
             return res.ToString();
+        }
+        public static string TransformDateToRussian(string inputDate)
+        {
+            DateTime date = DateTime.ParseExact(inputDate, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+            return date.ToString("d MMMM yyyy", new CultureInfo("ru-RU"));
         }
     }
 }
