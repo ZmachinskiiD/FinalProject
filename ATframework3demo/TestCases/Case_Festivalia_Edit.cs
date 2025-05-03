@@ -65,7 +65,9 @@ namespace ATframework3demo.TestCases
                 var FestivalUpperTab = new ConstructorUpperTab();
                 FestivalUpperTab.goToVenuePage().OpenVenueCard(venue.Name).OpenForEdit().clearData().passData(venue2).saveChanges();
                 var header = new HeaderPage();
-                header.FilterByName(festival.Name).goToFestivalPage(festId).GetVenueByName(venue2.Name).GoToVenueDetail().assertDescription(venue2.Description);
+                var venuePage = header.FilterByName(festival.Name).goToFestivalPage(festId).GetVenueByName(venue2.Name).GoToVenueDetail();
+                venuePage.assertTitle(venue2.Name);
+                venuePage.assertDescription(venue2.Description);
             }
             public static void EditEventInfo(SearchPage homePage)
             {
