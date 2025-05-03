@@ -29,7 +29,7 @@ namespace ATframework3demo.PageObjects.LK
         }
         public void FindTheFestival()
         {
-            if (!(moreButton.WaitElementDisplayed()))
+            if (!moreButton.WaitElementDisplayed())
             {
                 throw new Exception("Не найден фестиваль в ЛК");
             }

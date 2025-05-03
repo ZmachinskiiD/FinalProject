@@ -75,7 +75,7 @@ namespace ATframework3demo.TestCases
             festival.addTagByName(tag.Name);
             var venueId = festival.addVenue(venue);
             var eventId = venue.AddEvent(EEvent);
-            Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+            Festival.addPhotos(festId, venueId, eventId, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
             homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name)
                .OpenMenu().pressTheChangeStatusButton().ToDrafts();
             var header = new HeaderPage();
@@ -93,7 +93,7 @@ namespace ATframework3demo.TestCases
             festival.addTagByName(tag.Name);
             var venueId = festival.addVenue(venue);
             var eventId = venue.AddEvent(EEvent);
-            Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+            Festival.addPhotos(festId, venueId, eventId, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
             homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GoToDrafts().GetFestivalCardByName(festival.Name)
                .OpenMenu().pressTheChangeStatusButton().Publish();
             var header = new HeaderPage();

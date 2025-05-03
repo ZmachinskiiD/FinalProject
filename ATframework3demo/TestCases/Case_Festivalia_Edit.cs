@@ -34,7 +34,7 @@ namespace ATframework3demo.TestCases
                 festival.addTagByName(tag.Name);
                 var venueId = festival.addVenue(venue);
                 var eventId = venue.AddEvent(EEvent);
-                Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+                Festival.addPhotos(festId, venueId, eventId,  homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
 
                 var festivalNewInfo = new Festival(11, 40, null, homePage.PortalInfo);
                 homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name)
@@ -57,7 +57,7 @@ namespace ATframework3demo.TestCases
                 festival.addTagByName(tag.Name);
                 var venueId = festival.addVenue(venue);
                 var eventId = venue.AddEvent(EEvent);
-                Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+                Festival.addPhotos(festId, venueId, eventId,  homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
 
                 var venue2 = new Venue(null, null, null, null, homePage.PortalInfo);
                 homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name)
@@ -81,7 +81,7 @@ namespace ATframework3demo.TestCases
                 festival.addTagByName(tag.Name);
                 var venueId = festival.addVenue(venue);
                 var eventId = venue.AddEvent(EEvent);
-                Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+                Festival.addPhotos(festId, venueId, eventId,  homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
 
                 var Event2 = new Event(13, 13);
                 homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name)
@@ -105,7 +105,7 @@ namespace ATframework3demo.TestCases
                 var venueId = festival.addVenue(venue);
                 var venueId2 = festival.addVenue(venue2);
                 var eventId = venue.AddEvent(EEvent); 
-                Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+                Festival.addPhotos(festId, venueId, eventId, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
                 venue2.AddPhotoVenue();
                 homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GetFestivalCardByName(festival.Name)
                     .OpenMenu().OpenFestivalForEdit();

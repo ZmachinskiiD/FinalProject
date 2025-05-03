@@ -30,19 +30,11 @@ namespace ATframework3demo.TestEntities.Festivalia
         {
             var venueID = GetVenueID();
             PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_event(VENUE_ID, TITLE, DESCRIPTION,START_AT,END_AT)" +
-                $"VALUES({venueID},'{Event.Name}','{Event.Description}','{ConvertDateFormatSafe(Event.DateStart) + ' ' + Event.TimeStart}', '{ConvertDateFormatSafe(Event.DateEnd) + ' ' + Event.TimeEnd}');", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
+                $"VALUES({venueID},'{Event.Name}','{Event.Description}','{HelperMethods.ConvertDateFormatSafe(Event.DateStart) + ' ' + Event.TimeStart}', '{HelperMethods.ConvertDateFormatSafe(Event.DateEnd) + ' ' + Event.TimeEnd}');", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             var result = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM up_festivaliya_event WHERE TITLE='{Event.Name}'", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             return result.Count == 0 ? null : result[0].ID;
         }
-        public static string? ConvertDateFormatSafe(string inputDate)
-        {
-            if (DateTime.TryParseExact(inputDate, "dd.MM.yyyy",
-                CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
-            {
-                return date.ToString("yyyy-MM-dd");
-            }
-            return null;
-        }
+       
         public void AddPhotoVenue()
         {
             var fileId = PortalDatabaseExecutor.ExecuteQuery($"Select max(file_id) as ID from up_festivaliya_images", PortalInfo.PortalUri, PortalInfo.PortalAdmin)[0].ID;

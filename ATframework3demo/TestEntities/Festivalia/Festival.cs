@@ -33,7 +33,7 @@ namespace ATframework3demo.TestEntities.Festivalia
            int IsPublished= Convert.ToInt32(isPublished);
             var authorId = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM b_user WHERE LOGIN='{user.LoginAkaEmail}'", PortalInfo.PortalUri, PortalInfo.PortalAdmin)[0].ID;
             PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_festival(TITLE,DESCRIPTION,SHORT_DESC,START_AT,END_AT,ORGANIZER_ID,IS_PUBLISHED)" +
-                $"VALUES('{Name}','{Description}','{ShortDescription}','{ConvertDateFormatSafe(DateStart)}','{ConvertDateFormatSafe(DateEnd)}',{authorId},{IsPublished});", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
+                $"VALUES('{Name}','{Description}','{ShortDescription}','{HelperMethods.ConvertDateFormatSafe(DateStart)}','{HelperMethods.ConvertDateFormatSafe(DateEnd)}',{authorId},{IsPublished});", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             var result = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM up_festivaliya_festival WHERE TITLE='{Name}'", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             return result.Count == 0 ? null : result[0].ID;
         }
@@ -53,8 +53,9 @@ namespace ATframework3demo.TestEntities.Festivalia
             var result = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM up_festivaliya_venue WHERE TITLE='{venue.Name}'", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             return result.Count == 0 ? null : result[0].ID;
         }
-        public static void addPhotos(string festivalId, string venueId, string eventId, int fileId, Uri portalUri, User adminUser)
+        public static void addPhotos(string festivalId, string venueId, string eventId, Uri portalUri, User adminUser)
         {
+            var fileId = PortalDatabaseExecutor.ExecuteQuery($"Select max(file_id) as ID from up_festivaliya_images", portalUri, adminUser)[0].ID;
             PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_images(ENTITY_TYPE, ENTITY_ID, FILE_ID,IS_MAIN)" +
                 $"VALUES " +
                 $"('festival_cover','{festivalId}','{fileId}',1)," +
@@ -82,14 +83,6 @@ namespace ATframework3demo.TestEntities.Festivalia
             PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_festival_tag (FESTIVAL_ID, TAG_ID)" +
                 $"VALUES({festivalId},{tagId})", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
         }
-        public static string? ConvertDateFormatSafe(string inputDate)
-        {
-            if (DateTime.TryParseExact(inputDate, "dd.MM.yyyy",
-                CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
-            {
-                return date.ToString("yyyy-MM-dd");
-            }
-            return null;
-        }
+        
     }
 }

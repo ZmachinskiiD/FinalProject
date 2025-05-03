@@ -5,8 +5,6 @@ using ATframework3demo.TestEntities.Festivalia;
 
 namespace ATframework3demo.TestCases
 {
-    public class Case_Festivalia_FestivalPage
-    {
         public class Case_Festivaliya_FestivalPage : CaseCollectionBuilder
         {
             protected override List<TestCase> GetCases()
@@ -30,7 +28,7 @@ namespace ATframework3demo.TestCases
                 festival.addTagByName(tag.Name);
                 var venueId=festival.addVenue(venue);
                 var eventId=venue.AddEvent(EEvent);
-                Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+                Festival.addPhotos(festId, venueId, eventId, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
                 homePage.GoToHeader().FilterByName(festival.Name).goToFestivalPage(festId).assertTitle(festival.Name);
                 var festivalPage = new FestivalDetailPage();
                 festivalPage.assertDescription(festival.Description);
@@ -50,11 +48,11 @@ namespace ATframework3demo.TestCases
                 var venueId = festival.addVenue(venue);
                 var eventId = venue.AddEvent(EEvent);
 
-                Festival.addPhotos(festId, venueId, eventId, 400, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
+                Festival.addPhotos(festId, venueId, eventId, homePage.PortalInfo.PortalUri, homePage.PortalInfo.PortalAdmin);
                 homePage.GoToHeader().FilterByName(festival.Name).goToFestivalPage(festId).GetVenueByName(venue.Name).GoToVenueDetail().assertTitle(venue.Name);
                 var venuePage = new VenueDetailPage();
                 venuePage.assertDescription(venue.Description);
             }
         }
-    }
+   
 }
