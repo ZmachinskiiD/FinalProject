@@ -51,6 +51,7 @@ namespace atFrameWork2.BaseFramework
 
                 if (EnvType == TestCaseEnvType.Web)
                 {
+                    
                     var portalSearchPage = new SearchPage(TestPortal);
                     WebDriverActions.OpenUri(portalSearchPage.PortalInfo.PortalUri, portalSearchPage.Driver);
                     Body.Invoke(portalSearchPage);

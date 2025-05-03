@@ -80,7 +80,6 @@ namespace ATframework3demo.TestCases
         private void SearchFestivalOnTags(SearchPage homePage)
         {
             User testUser = new User(true);
-            Console.WriteLine(testUser.LoginAkaEmail);
             User.CreateUser(testUser);
             Tag tag1 = new Tag("", homePage.PortalInfo);
             tag1.InsertTag();
@@ -121,7 +120,6 @@ namespace ATframework3demo.TestCases
         private void SearchFestivalOnTag(SearchPage homePage)
         {
             User testUser = new User(true);
-            Console.WriteLine(testUser.LoginAkaEmail);
             User.CreateUser(testUser);
             Tag tag = new Tag("", homePage.PortalInfo);
             tag.InsertTag();

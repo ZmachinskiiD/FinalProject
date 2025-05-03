@@ -20,6 +20,7 @@ namespace ATframework3demo.TestCases
 
         private void DeleteParticipationUnPublishedFestival(SearchPage homePage)
         {
+            
             User testUser = new User(true);
             User.CreateUser(testUser);
             Tag tag = new Tag("", homePage.PortalInfo);

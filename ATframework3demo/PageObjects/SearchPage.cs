@@ -11,12 +11,14 @@ namespace ATframework3demo.PageObjects
         {
             toggleBtn.WaitElementDisplayed();
             Driver = driver;
+            Driver.Manage().Window.Size = new System.Drawing.Size(500, 500);
         }
         public SearchPage(PortalInfo portal,IWebDriver driver = default)
         {
             toggleBtn.WaitElementDisplayed();
             Driver = driver;
             PortalInfo = portal;
+            Driver.Manage().Window.Size = new System.Drawing.Size(500, 500);
         }
         
         public IWebDriver Driver { get; }

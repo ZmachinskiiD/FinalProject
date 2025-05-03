@@ -20,11 +20,12 @@ namespace ATframework3demo.PageObjects
            new WebItem(Path + "//button[contains(@class,'action-btn participate')]",
                "Кнопка добавить участвую по названию фестиваля");
         WebItem detailBtn =>
-            new WebItem("//a[contains(@class,'details-btn')]",
+            new WebItem(Path + "//a[contains(@class,'details-btn')]",
                 $"Кнопка подробнее о фестивале по названию");
         WebItem nameFestival(string name) =>
             new WebItem(Path + $"//h3[text()='{name}']",
                 "Название фестиваля в афише фестиваля");
+
         public SearchPage GoToSearch()
         {
             return new SearchPage();
