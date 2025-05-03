@@ -22,6 +22,11 @@ namespace ATframework3demo.PageObjects.LK
             string path = $"//div[@class='festival-card'][.//h3[text()='{name}']]";
             return new MyFestivalCard(path);
         }
+        public MyFestivalCard GetFestivalCardByID(string id)
+        {
+            string path = $"//div[@class='festival-card'][.//a[@href=\"/festivals/{id}/\"]]";
+            return new MyFestivalCard(path);
+        }
         public ConstructorMainInfo GoToConstructor()
         {
             сreateFestivalButton.Click();
