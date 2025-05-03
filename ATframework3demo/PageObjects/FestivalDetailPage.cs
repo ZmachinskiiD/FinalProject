@@ -20,13 +20,13 @@ namespace ATframework3demo.PageObjects
             new WebItem("//button[contains(@class,'action-btn participate')]",
                 "Кнопка участвую");
         WebItem festivalTitle =>
-            new WebItem("//*[@class='festival-title']",
+            new WebItem("//h1[@class='festival-title']",
                 "Название фестиваля");
         WebItem festivalDates =>
             new WebItem("//div[@class='festival-dates']",
                 "Даты фестиваля");
         WebItem festivalDescription =>
-            new WebItem("//*[@class='festival-description']",
+            new WebItem("//h1[@class='festival-description']",
                 "Описание фестиваля");
         WebItem mapCanvas =>
             new WebItem("//canvas[@id='mapCanvas']",
