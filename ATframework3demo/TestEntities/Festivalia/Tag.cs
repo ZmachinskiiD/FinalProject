@@ -10,7 +10,7 @@ namespace ATframework3demo.TestEntities.Festivalia
         public PortalInfo PortalInfo { get; }
         public Tag(string name = "", PortalInfo? portalInfo = null) 
         {
-            Name = name=="" ? HelperMethods.GetDateTimeSaltString(true, 12) : name;
+            Name = name=="" ? HelperMethods.GetDateTimeSaltString(true, 15) : name;
             PortalInfo = portalInfo;
         }
         public string InsertTag()
