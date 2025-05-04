@@ -22,12 +22,19 @@ namespace ATframework3demo.TestCases
         private void DeleteParticipationUnPublishedFestival(SearchPage homePage)
         {
             WebItem.DefaultDriver.Manage().Window.Size = new System.Drawing.Size(375,667);
+            WebItem.DefaultDriver.Manage().Window.Position = new System.Drawing.Point(630, 200);
+            var userDriver = WebItem.DefaultDriver;
+            var winHandle = WebItem.DefaultDriver.CurrentWindowHandle;
+
+     
             User testUser = new User(true);
             User.CreateUser(testUser);
+            User testOrg = new User(true);
+            User.CreateUser(testOrg);
             Tag tag = new Tag("", homePage.PortalInfo);
             tag.InsertTag();
             Festival festival = new Festival(1, 2, "", homePage.PortalInfo);
-            festival.insertFestival(testUser);
+            festival.insertFestival(testOrg);
             festival.addTags(tag);
             Venue venue = new Venue("", "", "", "", homePage.PortalInfo);
             Event testEvent = new Event(1, 1, 6, 7, "", "", "", homePage.PortalInfo);
@@ -36,6 +43,7 @@ namespace ATframework3demo.TestCases
             testEvent.AddPhotoEvent();
             venue.AddPhotoVenue();
             festival.AddPhotoFestival();
+
             var addToParticipationFest = homePage
                 .GoToHeaderMobile()
                 .GoToLogin()
@@ -55,15 +63,27 @@ namespace ATframework3demo.TestCases
                 .GetParticipationCardByName(festival.Name)
                 .assertByName(festival.Name);
 
-            WebDriverActions.OpenUri(homePage.PortalInfo.PortalUri, homePage.Driver);
-            homePage
-                .GoToHeaderMobile()
+            var orgDriver = WebDriverActions.GetNewDriver();
+            WebDriverActions.SwitchDefaultDriver(orgDriver);
+            var homePage2 = new SearchPage();
+            WebDriverActions.OpenUri(homePage.PortalInfo.PortalUri, orgDriver);
+            homePage2
+                .GoToHeader()
+                .GoToLogin()
+                .Login(testOrg)
+                .GoToSearch()
+                .GoToHeader()
                 .GoToLK()
                 .GoToMyFestivalsTab()
                 .GetFestivalCardByName(festival.Name)
                 .OpenMenu()
                 .pressTheChangeStatusButton()
-                .ToDrafts();
+                .Publish();
+
+
+
+            WebDriverActions.SwitchDefaultDriver(userDriver);
+            orgDriver.Quit();
             WebDriverActions.OpenUri(homePage.PortalInfo.PortalUri, homePage.Driver);
             var addAfterUnPibhlished =
             homePage

@@ -96,5 +96,11 @@ namespace atFrameWork2.SeleniumFramework
             driver ??= WebItem.DefaultDriver;
             driver.SwitchTo().DefaultContent();
         }
+        // Переключает на входящий драйвер
+        public static void SwitchDefaultDriver(IWebDriver driver)
+        {
+            Log.Info($"Switch default driver on {driver.Title}");
+            WebItem.DefaultDriver = driver;
+        }
     }
 }
