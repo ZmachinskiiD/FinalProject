@@ -76,7 +76,7 @@ namespace ATframework3demo.PageObjects
             regBtn.Click();
             return new LoginPage();
         }
-        public bool EmailIsExist()
+        public bool IsEmailExist()
         {
             return errorEmailMsg.WaitElementDisplayed(3);
 

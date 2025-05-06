@@ -24,7 +24,7 @@ namespace ATframework3demo.TestCases
                 var venue = new Venue(null,null,null,null,homePage.PortalInfo);
                 var EEvent = new Event(13, 13);
 
-                var festId=festival.insertFestival(testUser);
+                var festId=festival.InsertInBD(testUser);
                 festival.addTagByName(tag.Name);
                 var venueId=festival.addVenue(venue);
                 var eventId=venue.AddEvent(EEvent);
@@ -43,7 +43,7 @@ namespace ATframework3demo.TestCases
                 var venue = new Venue(null, null, null, null, homePage.PortalInfo);
                 var EEvent = new Event(13, 13);
 
-                var festId = festival.insertFestival(testUser);
+                var festId = festival.InsertInBD(testUser);
                 festival.addTagByName(tag.Name);
                 var venueId = festival.addVenue(venue);
                 var eventId = venue.AddEvent(EEvent);

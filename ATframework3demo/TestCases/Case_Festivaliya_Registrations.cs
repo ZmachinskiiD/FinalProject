@@ -28,7 +28,7 @@ namespace ATframework3demo.TestCases
                 .GoToRegister()
                 .CompleteForm(testUser)
                 .CreateAccount(testUser)
-                .EmailIsExist();
+                .IsEmailExist();
             if (!errorCreateAccount)
             {
                 Log.Error($"не появилось окно с ошибкой {testUser.LoginAkaEmail} уже зарегестрирован в системе");

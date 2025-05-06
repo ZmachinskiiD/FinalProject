@@ -30,7 +30,7 @@ namespace ATframework3demo.TestCases
                 var festival = new Festival(11, 40, null, homePage.PortalInfo);
                 var venue = new Venue(null, null, null, null, homePage.PortalInfo);
                 var EEvent = new Event(13, 13);
-                var festId = festival.insertFestival(testUser);
+                var festId = festival.InsertInBD(testUser);
                 festival.addTagByName(tag.Name);
                 var venueId = festival.addVenue(venue);
                 var eventId = venue.AddEvent(EEvent);
@@ -53,7 +53,7 @@ namespace ATframework3demo.TestCases
                 var festival = new Festival(11, 40, null, homePage.PortalInfo);
                 var venue = new Venue(null, null, null, null, homePage.PortalInfo);
                 var EEvent = new Event(13, 13);
-                var festId = festival.insertFestival(testUser);
+                var festId = festival.InsertInBD(testUser);
                 festival.addTagByName(tag.Name);
                 var venueId = festival.addVenue(venue);
                 var eventId = venue.AddEvent(EEvent);
@@ -77,7 +77,7 @@ namespace ATframework3demo.TestCases
                 var festival = new Festival(11, 40, null, homePage.PortalInfo);
                 var venue = new Venue(null, null, null, null, homePage.PortalInfo);
                 var EEvent = new Event(13, 13);
-                var festId = festival.insertFestival(testUser);
+                var festId = festival.InsertInBD(testUser);
                 festival.addTagByName(tag.Name);
                 var venueId = festival.addVenue(venue);
                 var eventId = venue.AddEvent(EEvent);
@@ -100,7 +100,7 @@ namespace ATframework3demo.TestCases
                 var venue = new Venue(null, null, null, null, homePage.PortalInfo);
                 var venue2 = new Venue("ПЛ2", null, null, null, homePage.PortalInfo);
                 var EEvent = new Event(13, 13);
-                var festId = festival.insertFestival(testUser);
+                var festId = festival.InsertInBD(testUser);
                 festival.addTagByName(tag.Name);
                 var venueId = festival.addVenue(venue);
                 var venueId2 = festival.addVenue(venue2);

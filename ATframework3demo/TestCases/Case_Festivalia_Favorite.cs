@@ -22,18 +22,13 @@ namespace ATframework3demo.TestCases
         {
             User testUser = new User(true);
             User.CreateUser(testUser);
-            Tag tag = new Tag("",homePage.PortalInfo);
-            tag.InsertTag();
-            Festival festival = new Festival(1, 2, "", homePage.PortalInfo);
-            festival.insertFestival(testUser);
-            festival.addTags(tag);
-            Venue venue = new Venue("", "", "", "", homePage.PortalInfo);
-            Event testEvent = new Event(1, 1, 6, 7, "", "", "", homePage.PortalInfo);
-            festival.addVenue(venue);
-            venue.AddEvent(testEvent);
-            testEvent.AddPhotoEvent();
-            venue.AddPhotoVenue();
-            festival.AddPhotoFestival();
+            Tag tag = new Tag(portalInfo: homePage.PortalInfo);
+            Festival festival = new Festival(1, 2, portalInfo: homePage.PortalInfo);
+            Venue venue = new Venue(portalInfo: homePage.PortalInfo);
+            Event testEvent = new Event(1, 1, 6, 7, portalInfo: homePage.PortalInfo);
+            
+            festival.AddTestDataFest(testUser, tag, venue, testEvent);
+
             var addToFavoriteFest = homePage
                 .GoToHeader()
                 .GoToLogin()
@@ -80,18 +75,12 @@ namespace ATframework3demo.TestCases
         {
             User testUser = new User(true);
             User.CreateUser(testUser);
-            Tag tag = new Tag("", homePage.PortalInfo);
-            tag.InsertTag();
-            Festival festival = new Festival(1, 2, "", homePage.PortalInfo);
-            festival.insertFestival(testUser);
-            festival.addTags(tag);
-            Venue venue = new Venue("", "", "", "", homePage.PortalInfo);
-            Event testEvent = new Event(1, 1, 6, 7, "", "", "", homePage.PortalInfo);
-            festival.addVenue(venue);
-            venue.AddEvent(testEvent);
-            testEvent.AddPhotoEvent();
-            venue.AddPhotoVenue();
-            festival.AddPhotoFestival();
+            Tag tag = new Tag(portalInfo: homePage.PortalInfo);
+            Venue venue = new Venue(portalInfo: homePage.PortalInfo);
+            Event testEvent = new Event(1, 1, 6, 7, portalInfo: homePage.PortalInfo);
+            Festival festival = new Festival(1, 2, portalInfo: homePage.PortalInfo);
+            festival.AddTestDataFest(testUser, tag, venue, testEvent);
+    
             var result = homePage
                 .GoToHeader()
                 .FilterByName(festival.Name)

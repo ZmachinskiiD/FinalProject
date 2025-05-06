@@ -25,6 +25,7 @@ namespace ATframework3demo.TestCases
             WebItem.DefaultDriver.Manage().Window.Position = new System.Drawing.Point(630, 200);
             var userDriver = WebItem.DefaultDriver;
             var winHandle = WebItem.DefaultDriver.CurrentWindowHandle;
+            
 
      
             User testUser = new User(true);
@@ -34,7 +35,7 @@ namespace ATframework3demo.TestCases
             Tag tag = new Tag("", homePage.PortalInfo);
             tag.InsertTag();
             Festival festival = new Festival(1, 2, "", homePage.PortalInfo);
-            festival.insertFestival(testOrg);
+            festival.InsertInBD(testOrg);
             festival.addTags(tag);
             Venue venue = new Venue("", "", "", "", homePage.PortalInfo);
             Event testEvent = new Event(1, 1, 6, 7, "", "", "", homePage.PortalInfo);
@@ -110,7 +111,7 @@ namespace ATframework3demo.TestCases
             Tag tag = new Tag("", homePage.PortalInfo);
             tag.InsertTag();
             Festival festival = new Festival(1, 2, "", homePage.PortalInfo);
-            festival.insertFestival(testUser);
+            festival.InsertInBD(testUser);
             festival.addTags(tag);
             Venue venue = new Venue("", "", "", "", homePage.PortalInfo);
             Event testEvent = new Event(1, 1, 6, 7, "", "", "", homePage.PortalInfo);
