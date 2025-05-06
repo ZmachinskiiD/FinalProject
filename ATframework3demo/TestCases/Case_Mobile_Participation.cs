@@ -35,7 +35,7 @@ namespace ATframework3demo.TestCases
             Tag tag = new Tag("", homePage.PortalInfo);
             tag.InsertTag();
             Festival festival = new Festival(1, 2, "", homePage.PortalInfo);
-            festival.InsertInBD(testOrg);
+            festival.InsertInDB(testOrg);
             festival.addTags(tag);
             Venue venue = new Venue("", "", "", "", homePage.PortalInfo);
             Event testEvent = new Event(1, 1, 6, 7, "", "", "", homePage.PortalInfo);
@@ -111,7 +111,7 @@ namespace ATframework3demo.TestCases
             Tag tag = new Tag("", homePage.PortalInfo);
             tag.InsertTag();
             Festival festival = new Festival(1, 2, "", homePage.PortalInfo);
-            festival.InsertInBD(testUser);
+            festival.InsertInDB(testUser);
             festival.addTags(tag);
             Venue venue = new Venue("", "", "", "", homePage.PortalInfo);
             Event testEvent = new Event(1, 1, 6, 7, "", "", "", homePage.PortalInfo);

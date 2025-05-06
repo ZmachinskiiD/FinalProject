@@ -83,7 +83,6 @@ namespace ATframework3demo.PageObjects
         }
         public void ConfirmAlert()
         {
-            Thread.Sleep(3000);
             WebDriverActions.BrowserAlert(true);    
         }
         public HeaderPage GoToHeader()

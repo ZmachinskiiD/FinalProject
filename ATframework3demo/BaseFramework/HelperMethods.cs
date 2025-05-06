@@ -94,7 +94,7 @@ namespace ATframework3demo.BaseFramework
             DateTime date = DateTime.ParseExact(inputDate, "dd.MM.yyyy", CultureInfo.InvariantCulture);
             return date.ToString("d MMMM yyyy", new CultureInfo("ru-RU"));
         }
-        public static string? ConvertDateFormatSafe(string inputDate)
+        public static string? ConvertDateFormat(string inputDate)
         {
             if (DateTime.TryParseExact(inputDate, "dd.MM.yyyy",
                 CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))

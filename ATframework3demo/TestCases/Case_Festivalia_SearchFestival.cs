@@ -29,7 +29,7 @@ namespace ATframework3demo.TestCases
             Tag tag = new Tag("", homePage.PortalInfo);
             tag.InsertTag();
             Festival festival = new Festival(0, 0, "", homePage.PortalInfo);
-            festival.InsertInBD(testUser);
+            festival.InsertInDB(testUser);
             festival.addTags(tag);
             Venue venue = new Venue("", "", "", "", homePage.PortalInfo);
             Event testEvent = new Event(0, 0, 6, 7, "", "", "", homePage.PortalInfo);
@@ -54,7 +54,7 @@ namespace ATframework3demo.TestCases
             tag.InsertTag();
             Festival festival = new Festival(0, 0, "", homePage.PortalInfo);
             festival.Name = festival.Name.ToUpper();
-            festival.InsertInBD(testUser);
+            festival.InsertInDB(testUser);
             festival.addTags(tag);
             Venue venue = new Venue("", "", "", "", homePage.PortalInfo);
             Event testEvent = new Event(0, 0, 6, 7, "", "", "", homePage.PortalInfo);
@@ -88,7 +88,7 @@ namespace ATframework3demo.TestCases
             Tag tag3 = new Tag("", homePage.PortalInfo);
             tag3.InsertTag();
             Festival festival = new Festival(0, 0, "", homePage.PortalInfo);
-            festival.InsertInBD(testUser);
+            festival.InsertInDB(testUser);
             festival.addTags(tag1);
             festival.addTags(tag2);
             festival.addTags(tag3);
@@ -124,7 +124,7 @@ namespace ATframework3demo.TestCases
             Tag tag = new Tag("", homePage.PortalInfo);
             tag.InsertTag();
             Festival festival = new Festival(0, 0, "", homePage.PortalInfo);
-            festival.InsertInBD(testUser);
+            festival.InsertInDB(testUser);
             festival.addTags(tag);
             Venue venue = new Venue("", "", "", "", homePage.PortalInfo);
             Event testEvent = new Event(0, 0, 6, 7, "", "", "", homePage.PortalInfo);
@@ -157,7 +157,7 @@ namespace ATframework3demo.TestCases
             Tag tag = new Tag("",homePage.PortalInfo);
             tag.InsertTag();
             Festival festival = new Festival(0,0,"",homePage.PortalInfo);
-            festival.InsertInBD(testUser);
+            festival.InsertInDB(testUser);
             festival.addTags(tag);
             Venue venue = new Venue("","","","",homePage.PortalInfo);
             Event testEvent = new Event(0,0,6,7,"","","",homePage.PortalInfo);

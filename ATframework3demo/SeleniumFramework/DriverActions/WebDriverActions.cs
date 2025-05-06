@@ -5,6 +5,8 @@ using ATframework3demo.PageObjects;
 using ATframework3demo.SeleniumFramework.DriverActions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 namespace atFrameWork2.SeleniumFramework
 {
@@ -68,6 +70,8 @@ namespace atFrameWork2.SeleniumFramework
         public static void BrowserAlert(bool accept, IWebDriver driver = default)
         {
             driver ??= WebItem.DefaultDriver;
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.AlertIsPresent());
             IAlert alert = driver.SwitchTo().Alert();
             string alertText = alert.Text;
             string result = $"Алерт браузера '{alertText}': нажата кнопка ";

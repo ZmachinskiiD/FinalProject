@@ -19,12 +19,12 @@ namespace ATframework3demo.TestCases
             {
                 var testUser = new User(true);
                 User.CreateUser(testUser);
-                var tag = new Tag("Активный отдых", homePage.PortalInfo);
+                var tag = new Tag("Автомобили", homePage.PortalInfo);
                 var festival = new Festival(11, 40,null,homePage.PortalInfo);
                 var venue = new Venue(null,null,null,null,homePage.PortalInfo);
                 var EEvent = new Event(13, 13);
 
-                var festId=festival.InsertInBD(testUser);
+                var festId=festival.InsertInDB(testUser);
                 festival.addTagByName(tag.Name);
                 var venueId=festival.addVenue(venue);
                 var eventId=venue.AddEvent(EEvent);
@@ -38,12 +38,12 @@ namespace ATframework3demo.TestCases
             {
                 var testUser = new User(true);
                 User.CreateUser(testUser);
-                var tag = new Tag("Активный отдых", homePage.PortalInfo);
+                var tag = new Tag("Автомобили", homePage.PortalInfo);
                 var festival = new Festival(11, 40, null, homePage.PortalInfo);
                 var venue = new Venue(null, null, null, null, homePage.PortalInfo);
                 var EEvent = new Event(13, 13);
 
-                var festId = festival.InsertInBD(testUser);
+                var festId = festival.InsertInDB(testUser);
                 festival.addTagByName(tag.Name);
                 var venueId = festival.addVenue(venue);
                 var eventId = venue.AddEvent(EEvent);

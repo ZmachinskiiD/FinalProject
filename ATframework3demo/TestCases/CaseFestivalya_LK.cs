@@ -22,6 +22,7 @@ namespace ATframework3demo.TestCases
         private void ValidateVisitortabs(SearchPage homePage)
         {
             User testUser = new User(false);
+            User.CreateUser(testUser);
             homePage
                    .GoToHeader()
                    .GoToLogin()
@@ -33,10 +34,10 @@ namespace ATframework3demo.TestCases
         {
             var testUser = new User(true);
             User.CreateUser(testUser);
-            var tag = new Tag("Активный отдых", homePage.PortalInfo);
+            var tag = new Tag("Автомобили", homePage.PortalInfo);
             var festival = new Festival(11, 40, null, homePage.PortalInfo);
             var venue = new Venue(null, null, null, null, homePage.PortalInfo);
-            var festId = festival.InsertInBD(testUser, false);
+            var festId = festival.InsertInDB(testUser, false);
             festival.addTagByName(tag.Name);
             var venueId = festival.addVenue(venue);
             festival.AddPhotoFestival();
@@ -51,10 +52,10 @@ namespace ATframework3demo.TestCases
         {
             var testUser = new User(true);
             User.CreateUser(testUser);
-            var tag = new Tag("Активный отдых", homePage.PortalInfo);
+            var tag = new Tag("Автомобили", homePage.PortalInfo);
             var festival = new Festival(11, 40, null, homePage.PortalInfo);
  
-            var festId = festival.InsertInBD(testUser, false);
+            var festId = festival.InsertInDB(testUser, false);
             festival.addTagByName(tag.Name);
             festival.AddPhotoFestival();
             homePage.GoToHeader().GoToLogin().Login(testUser).GoToSearch().GoToHeader().GoToLK().GoToMyFestivalsTab().GoToDrafts().GetFestivalCardByName(festival.Name)
@@ -67,11 +68,11 @@ namespace ATframework3demo.TestCases
         {
             var testUser = new User(true);
             User.CreateUser(testUser);
-            var tag = new Tag("Активный отдых", homePage.PortalInfo);
+            var tag = new Tag("Автомобили", homePage.PortalInfo);
             var festival = new Festival(11, 40, null, homePage.PortalInfo);
             var venue = new Venue(null, null, null, null, homePage.PortalInfo);
             var EEvent = new Event(13, 13);
-            var festId = festival.InsertInBD(testUser);
+            var festId = festival.InsertInDB(testUser);
             festival.addTagByName(tag.Name);
             var venueId = festival.addVenue(venue);
             var eventId = venue.AddEvent(EEvent);
@@ -85,11 +86,11 @@ namespace ATframework3demo.TestCases
         {
             var testUser = new User(true);
             User.CreateUser(testUser);
-            var tag = new Tag("Активный отдых", homePage.PortalInfo);
+            var tag = new Tag("Автомобили", homePage.PortalInfo);
             var festival = new Festival(11, 40, null, homePage.PortalInfo);
             var venue = new Venue(null, null, null, null, homePage.PortalInfo);
             var EEvent = new Event(13, 13);
-            var festId = festival.InsertInBD(testUser, false);
+            var festId = festival.InsertInDB(testUser, false);
             festival.addTagByName(tag.Name);
             var venueId = festival.addVenue(venue);
             var eventId = venue.AddEvent(EEvent);

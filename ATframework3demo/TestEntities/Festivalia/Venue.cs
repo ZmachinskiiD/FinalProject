@@ -30,7 +30,7 @@ namespace ATframework3demo.TestEntities.Festivalia
         {
             var venueID = GetVenueID();
             PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_event(VENUE_ID, TITLE, DESCRIPTION,START_AT,END_AT)" +
-                $"VALUES({venueID},'{Event.Name}','{Event.Description}','{HelperMethods.ConvertDateFormatSafe(Event.DateStart) + ' ' + Event.TimeStart}', '{HelperMethods.ConvertDateFormatSafe(Event.DateEnd) + ' ' + Event.TimeEnd}');", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
+                $"VALUES({venueID},'{Event.Name}','{Event.Description}','{HelperMethods.ConvertDateFormat(Event.DateStart) + ' ' + Event.TimeStart}', '{HelperMethods.ConvertDateFormat(Event.DateEnd) + ' ' + Event.TimeEnd}');", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             var result = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM up_festivaliya_event WHERE TITLE='{Event.Name}'", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             return result.Count == 0 ? null : result[0].ID;
         }

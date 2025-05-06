@@ -20,10 +20,6 @@ namespace ATframework3demo.TestCases
                 new TestCase("Создание черновика фестиваля", homePage => CreateFestivalDraft(homePage)),
                 new TestCase("Создание фестиваля c датой начала больше даты конца", homePage => CreateDateStartBiggerthanDateEnd(homePage)),
                 new TestCase("Создание фестиваля c датой начала меньше сегодня", homePage => CreateFestivalBeforeToday(homePage)),
-                //new TestCase("ФФФФФ", homePage => Placeholder(homePage)),
-
-
-
 
             };
             }

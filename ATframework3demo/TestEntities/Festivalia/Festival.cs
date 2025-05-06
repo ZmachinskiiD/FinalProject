@@ -28,12 +28,12 @@ namespace ATframework3demo.TestEntities.Festivalia
 
         }
 
-        public string InsertInBD(User user, bool? isPublished=true)
+        public string InsertInDB(User user, bool? isPublished=true)
         {
            int IsPublished= Convert.ToInt32(isPublished);
             var authorId = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM b_user WHERE LOGIN='{user.LoginAkaEmail}'", PortalInfo.PortalUri, PortalInfo.PortalAdmin)[0].ID;
             PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_festival(TITLE,DESCRIPTION,SHORT_DESC,START_AT,END_AT,ORGANIZER_ID,IS_PUBLISHED)" +
-                $"VALUES('{Name}','{Description}','{ShortDescription}','{HelperMethods.ConvertDateFormatSafe(DateStart)}','{HelperMethods.ConvertDateFormatSafe(DateEnd)}',{authorId},{IsPublished});", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
+                $"VALUES('{Name}','{Description}','{ShortDescription}','{HelperMethods.ConvertDateFormat(DateStart)}','{HelperMethods.ConvertDateFormat(DateEnd)}',{authorId},{IsPublished});", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             var result = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM up_festivaliya_festival WHERE TITLE='{Name}'", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             return result.Count == 0 ? null : result[0].ID;
         }
@@ -42,7 +42,7 @@ namespace ATframework3demo.TestEntities.Festivalia
             int IsPublished = Convert.ToInt32(isPublished);
             var authorId = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM b_user WHERE LOGIN='{user.LoginAkaEmail}'", PortalInfo.PortalUri, PortalInfo.PortalAdmin)[0].ID;
             PortalDatabaseExecutor.ExecuteQuery($"INSERT INTO up_festivaliya_festival(TITLE,DESCRIPTION,SHORT_DESC,START_AT,END_AT,ORGANIZER_ID,IS_PUBLISHED)" +
-                $"VALUES('{Name}','{Description}','{ShortDescription}','{HelperMethods.ConvertDateFormatSafe(DateStart)}','{HelperMethods.ConvertDateFormatSafe(DateEnd)}',{authorId},{IsPublished});", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
+                $"VALUES('{Name}','{Description}','{ShortDescription}','{HelperMethods.ConvertDateFormat(DateStart)}','{HelperMethods.ConvertDateFormat(DateEnd)}',{authorId},{IsPublished});", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             var result = PortalDatabaseExecutor.ExecuteQuery($"Select ID FROM up_festivaliya_festival WHERE TITLE='{Name}'", PortalInfo.PortalUri, PortalInfo.PortalAdmin);
             tag.InsertTag();
             addTags(tag);
